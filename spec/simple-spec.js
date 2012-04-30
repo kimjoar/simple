@@ -32,6 +32,18 @@ describe("Simple", function () {
             expect(view.test).toBeDefined();
         });
 
+        it("can call properties on parent", function() {
+            Simple.View.prototype.test = function() {
+                return "test";
+            };
+
+            var View = Simple.View.extend({});
+
+            var view = new View();
+
+            expect(view.test()).toMatch("test");
+        });
+
         it("favors properties in child over properties in parent", function() {
             Simple.View.prototype.test = function() {
                 return "parent";
@@ -80,6 +92,18 @@ describe("Simple", function () {
             var model = new Model();
 
             expect(model.test).toBeDefined();
+        });
+
+        it("can call properties on parent", function() {
+            Simple.Model.prototype.test = function() {
+                return "test";
+            };
+
+            var Model = Simple.Model.extend({});
+
+            var model = new Model();
+
+            expect(model.test()).toMatch("test");
         });
 
         it("favors properties in child over properties in parent", function() {
