@@ -1,4 +1,4 @@
 Simple
 ======
 
-Playing with MV* in JavaScript
+Simplistic MV* in JavaScript for learning purposes.
