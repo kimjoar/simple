@@ -101,10 +101,12 @@ describe("Simple", function () {
     });
 
     describe("View", function() {
-        it("enables initialization of views using new", function() {
-            var view = new Simple.View();
+        beforeEach(function() {
+            this.view = new Simple.View({ el: $('<div></div>') });
+        });
 
-            expect(view instanceof Simple.View).toBeTrue();
+        it("enables initialization of views using new", function() {
+            expect(this.view instanceof Simple.View).toBeTrue();
         });
 
         it("enables creation of new views", function() {
@@ -113,21 +115,15 @@ describe("Simple", function () {
 
         describe("render", function() {
             it("should return an instance of the view", function() {
-                var View = Simple.View.extend({});
-
-                var view = new View();
-
-                expect(view.render()).toBe(view);
+                expect(this.view.render()).toBe(this.view);
             });
         });
 
         describe("DOM", function() {
             it("enables DOM selector search in the views rendered html", function() {
-                var view = new Simple.View({ el: $('<div></div>') });
+                this.view.el.html('<h1>Kim Joar</h1>');
 
-                view.el.html('<h1>Kim Joar</h1>');
-
-                expect(view.DOM("h1").text()).toMatch("Kim Joar");
+                expect(this.view.DOM("h1").text()).toMatch("Kim Joar");
             });
         });
     });
