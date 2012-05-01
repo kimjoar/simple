@@ -112,22 +112,16 @@ describe("Simple", function () {
         });
 
         describe("renderTemplate", function() {
-            beforeEach(function() {
+            it("sets the view's el to a jQuery object", function() {
                 var View = Simple.View.extend({
                     template: "<h1>{{name}}</h1>"
                 });
 
-                this.view = new View();
+                var view = new View();
 
-                this.html = this.view.renderTemplate({ name: "Kim Joar" });
-            });
+                view.renderTemplate({ name: "Kim Joar" });
 
-            it("returns a rendered template", function() {
-                expect(this.html).toMatch("<h1>Kim Joar</h1>");
-            });
-
-            it("sets the view's el to a jQuery object", function() {
-                expect(this.view.el instanceof $).toBeTrue();
+                expect(view.el instanceof $).toBeTrue();
             });
         });
 
