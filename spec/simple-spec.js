@@ -225,6 +225,16 @@ describe("Simple", function () {
                 expect(spy).toHaveBeenCalledOnce();
             });
 
+            it("sets attributes on success", function() {
+                this.model.fetch();
+
+                this.requests[0].respond(200, { "Content-Type": "application/json" },
+                                 '{ "id": 12, "name": "Kim Joar" }');
+
+                expect(this.model.attr("id")).toMatch(12);
+                expect(this.model.attr("name")).toMatch("Kim Joar");
+            });
+
             it("triggers 'fetch:error' on failure", function() {
                 var spy = this.spy();
                 this.model.on("fetch:error", spy);
