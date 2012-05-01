@@ -17,7 +17,7 @@ describe("Simple", function () {
         it("enables initialization of views using new", function() {
             var view = new Simple.View();
 
-            expect(view instanceof Simple.View).toEqual(true);
+            expect(view instanceof Simple.View).toBeTrue();
         });
 
         it("enables creation of new view classes through extend", function() {
@@ -73,13 +73,47 @@ describe("Simple", function () {
 
             expect(spy).toHaveBeenCalledOnceWith("test", "test2");
         });
+
+        describe("render template", function() {
+            beforeEach(function() {
+                var View = Simple.View.extend({
+                    template: "<h1>{{name}}</h1>"
+                });
+
+                this.view = new View();
+
+                this.html = this.view.renderTemplate({ name: "Kim Joar" });
+            });
+
+            it("returns a rendered template", function() {
+                expect(this.html).toMatch("<h1>Kim Joar</h1>");
+            });
+
+            it("sets the view's el to a jQuery object", function() {
+                expect(this.view.el instanceof $).toBeTrue();
+            });
+        });
+
+        describe("DOM", function() {
+            it("enables DOM selector search in the views rendered html", function() {
+                var View = Simple.View.extend({
+                    template: "<div><h1>{{name}}</h1></div>"
+                });
+
+                var view = new View();
+
+                view.renderTemplate({ name: "Kim Joar" });
+
+                expect(view.DOM("h1").text()).toMatch("Kim Joar");
+            });
+        });
     });
 
     describe("Model", function() {
         it("enables initialization of models using new", function() {
             var model = new Simple.Model();
 
-            expect(model instanceof Simple.Model).toEqual(true);
+            expect(model instanceof Simple.Model).toBeTrue();
         });
 
         it("enables creation of new model classes through extend", function() {

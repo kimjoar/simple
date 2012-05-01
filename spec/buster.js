@@ -5,6 +5,7 @@ config["My tests"] = {
     environment: "browser",
     sources: [
         "vendor/jquery-1.7.2.js",
+        "vendor/mustache.js",
         "lib/simple.js"
     ],
     tests: [
