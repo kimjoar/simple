@@ -111,20 +111,6 @@ describe("Simple", function () {
             expect(Simple.View.extend).toBeDefined();
         });
 
-        describe("renderTemplate", function() {
-            it("sets the view's el to a jQuery object", function() {
-                var View = Simple.View.extend({
-                    template: "<h1>{{name}}</h1>"
-                });
-
-                var view = new View();
-
-                view.renderTemplate({ name: "Kim Joar" });
-
-                expect(view.el instanceof $).toBeTrue();
-            });
-        });
-
         describe("render", function() {
             it("should return an instance of the view", function() {
                 var View = Simple.View.extend({});
@@ -137,13 +123,9 @@ describe("Simple", function () {
 
         describe("DOM", function() {
             it("enables DOM selector search in the views rendered html", function() {
-                var View = Simple.View.extend({
-                    template: "<div><h1>{{name}}</h1></div>"
-                });
+                var view = new Simple.View({ el: $('<div></div>') });
 
-                var view = new View();
-
-                view.renderTemplate({ name: "Kim Joar" });
+                view.el.html('<h1>Kim Joar</h1>');
 
                 expect(view.DOM("h1").text()).toMatch("Kim Joar");
             });
