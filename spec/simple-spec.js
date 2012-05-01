@@ -178,5 +178,63 @@ describe("Simple", function () {
                 expect(spy2).not.toHaveBeenCalled();
             });
         });
+
+        describe("fetch", function() {
+            beforeEach(function() {
+                var Model = Simple.Model.extend({
+                    url: "/test"
+                });
+                this.model = new Model();
+
+                this.fakeXhr = sinon.useFakeXMLHttpRequest();
+                var requests = this.requests = [];
+
+                this.fakeXhr.onCreate = function (xhr) {
+                    requests.push(xhr);
+                };
+            });
+
+            afterEach(function() {
+                this.fakeXhr.restore();
+            });
+
+            it("performs an ajax request to the model's url", function() {
+                this.model.fetch();
+
+                expect(this.requests.length).toBe(1);
+                expect(this.requests[0].url).toMatch(this.model.url);
+            });
+
+            it("triggers 'fetch:started' before request", function() {
+                var spy = this.spy();
+                this.model.on("fetch:started", spy);
+
+                this.model.fetch();
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("triggers 'fetch:finished' on success", function() {
+                var spy = this.spy();
+                this.model.on("fetch:finished", spy);
+
+                this.model.fetch();
+
+                this.requests[0].respond();
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("triggers 'fetch:error' on failure", function() {
+                var spy = this.spy();
+                this.model.on("fetch:error", spy);
+
+                this.model.fetch();
+
+                this.requests[0].respond(404);
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+        });
     });
 });
