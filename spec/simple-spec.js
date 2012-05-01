@@ -26,7 +26,7 @@ describe("Simple", function () {
             expect(model.test).toBeDefined();
         });
 
-        it("enables further child creation from a created child", function() {
+        it("enables child creation from a created child", function() {
             var Model = Simple.Model.extend({
                 test: function() {
                     return "child1";
@@ -111,7 +111,7 @@ describe("Simple", function () {
             expect(Simple.View.extend).toBeDefined();
         });
 
-        describe("render template", function() {
+        describe("renderTemplate", function() {
             beforeEach(function() {
                 var View = Simple.View.extend({
                     template: "<h1>{{name}}</h1>"
@@ -128,6 +128,16 @@ describe("Simple", function () {
 
             it("sets the view's el to a jQuery object", function() {
                 expect(this.view.el instanceof $).toBeTrue();
+            });
+        });
+
+        describe("render", function() {
+            it("should return an instance of the view", function() {
+                var View = Simple.View.extend({});
+
+                var view = new View();
+
+                expect(view.render()).toBe(view);
             });
         });
 
