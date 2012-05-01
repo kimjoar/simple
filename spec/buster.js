@@ -4,10 +4,10 @@ config["My tests"] = {
     rootPath: "../",
     environment: "browser",
     sources: [
-        "vendor/jquery-1.7.2.js",
-        "vendor/mustache.js",
-        "vendor/EventEmitter.js",
-        "lib/simple.js"
+        "lib/jquery-1.7.2.js",
+        "lib/mustache.js",
+        "lib/EventEmitter.js",
+        "simple.js"
     ],
     tests: [
         "spec/*-spec.js"
