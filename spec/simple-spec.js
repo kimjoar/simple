@@ -236,5 +236,28 @@ describe("Simple", function () {
                 expect(spy).toHaveBeenCalledOnce();
             });
         });
+
+        describe("attr", function() {
+            it("can get and set a paramter", function() {
+                var model = new Simple.Model();
+
+                model.attr("name", "Kim Joar");
+
+                expect(model.attr("name")).toMatch("Kim Joar");
+            });
+        });
+
+        describe("toJSON", function() {
+            it("returns all set attributes", function() {
+                var model = new Simple.Model();
+
+                model.attr("name", "Kim Joar");
+                model.attr("employer", "BEKK");
+
+                var data = model.toJSON();
+                expect(data.name).toMatch("Kim Joar");
+                expect(data.employer).toMatch("BEKK");
+            });
+        });
     });
 });
