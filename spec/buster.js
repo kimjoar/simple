@@ -5,7 +5,6 @@ config["My tests"] = {
     environment: "browser",
     sources: [
         "lib/jquery-1.7.2.js",
-        "lib/mustache.js",
         "lib/EventEmitter.js",
         "simple.js"
     ],
