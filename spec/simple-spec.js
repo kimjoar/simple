@@ -86,16 +86,17 @@ describe("Simple", function () {
             expect(model.test()).toMatch("parent");
         });
 
-        it("calls initialize with all parameters when model in initialized", function() {
+        it("calls initialize with first parameter when model in initialized", function() {
             var spy = this.spy();
 
             var Model = Simple.Model.extend({
                 initialize: spy
             });
 
-            new Model("test", "test2");
+            var opts = { test: "testing", test2: "testing" };
+            new Model(opts);
 
-            expect(spy).toHaveBeenCalledOnceWith("test", "test2");
+            expect(spy).toHaveBeenCalledOnceWith(opts);
         });
 
     });
