@@ -129,10 +129,12 @@ describe("Simple", function () {
     });
 
     describe("Model", function() {
-        it("enables initialization of models using new", function() {
-            var model = new Simple.Model();
+        beforeEach(function() {
+            this.model = new Simple.Model();
+        });
 
-            expect(model instanceof Simple.Model).toBeTrue();
+        it("enables initialization of models using new", function() {
+            expect(this.model instanceof Simple.Model).toBeTrue();
         });
 
         it("enables creation of new models", function() {
@@ -141,40 +143,35 @@ describe("Simple", function () {
 
         describe("events", function() {
             it("allows binding and firing of events", function() {
-                var model = new Simple.Model();
-
                 var spy = this.spy();
 
-                model.on("test", spy, model);
-                model.trigger("test");
+                this.model.on("test", spy, this.model);
+                this.model.trigger("test");
 
                 expect(spy).toHaveBeenCalledOnce();
-                expect(spy).toHaveBeenCalledOn(model);
+                expect(spy).toHaveBeenCalledOn(this.model);
             });
 
             it("allows unbinding of events", function() {
-                var model = new Simple.Model();
-
                 var spy = this.spy();
 
-                model.on("test", spy);
-                model.off("test", spy);
-                model.trigger("test");
+                this.model.on("test", spy);
+                this.model.off("test", spy);
+                this.model.trigger("test");
 
                 expect(spy).not.toHaveBeenCalled();
             });
 
             it("creates a unique event handler for each instance", function() {
-                var model = new Simple.Model();
                 var model2 = new Simple.Model();
 
                 var spy = this.spy();
                 var spy2 = this.spy();
 
-                model.on("test", spy);
+                this.model.on("test", spy);
                 model2.on("test", spy2);
 
-                model.trigger("test");
+                this.model.trigger("test");
 
                 expect(spy).toHaveBeenCalledOnce();
                 expect(spy2).not.toHaveBeenCalled();
