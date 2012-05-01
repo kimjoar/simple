@@ -160,5 +160,47 @@ describe("Simple", function () {
         it("enables creation of new models", function() {
             expect(Simple.Model.extend).toBeDefined();
         });
+
+        describe("events", function() {
+            it("allows binding and firing of events", function() {
+                var model = new Simple.Model();
+
+                var spy = this.spy();
+
+                model.on("test", spy, model);
+                model.trigger("test");
+
+                expect(spy).toHaveBeenCalledOnce();
+                expect(spy).toHaveBeenCalledOn(model);
+            });
+
+            it("allows unbinding of events", function() {
+                var model = new Simple.Model();
+
+                var spy = this.spy();
+
+                model.on("test", spy);
+                model.off("test", spy);
+                model.trigger("test");
+
+                expect(spy).not.toHaveBeenCalled();
+            });
+
+            it("creates a unique event handling for each instance", function() {
+                var model = new Simple.Model();
+                var model2 = new Simple.Model();
+
+                var spy = this.spy();
+                var spy2 = this.spy();
+
+                model.on("test", spy);
+                model2.on("test", spy2);
+
+                model.trigger("test");
+
+                expect(spy).toHaveBeenCalledOnce();
+                expect(spy2).not.toHaveBeenCalled();
+            });
+        });
     });
 });

@@ -6,6 +6,7 @@ config["My tests"] = {
     sources: [
         "vendor/jquery-1.7.2.js",
         "vendor/mustache.js",
+        "vendor/EventEmitter.js",
         "lib/simple.js"
     ],
     tests: [
