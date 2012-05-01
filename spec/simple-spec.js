@@ -186,7 +186,7 @@ describe("Simple", function () {
                 expect(spy).not.toHaveBeenCalled();
             });
 
-            it("creates a unique event handling for each instance", function() {
+            it("creates a unique event handler for each instance", function() {
                 var model = new Simple.Model();
                 var model2 = new Simple.Model();
 
