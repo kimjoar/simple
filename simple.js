@@ -1,3 +1,8 @@
+// Simple
+//
+// A simplistic MV* JavaScript library created for learning purposes.
+// Simple may be freely distributed under the MIT license.
+
 (function(root, $, EventEmitter) {
 
     // The top-level namespace. All public Simple classes and modules will be
