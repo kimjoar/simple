@@ -1,32 +1,25 @@
-// Simple
+//     Simple
 //
-// A simplistic MV* JavaScript library created for learning purposes.
-// Simple may be freely distributed under the MIT license.
+//     A simplistic MV* JavaScript library.
+//     Simple may be freely distributed under the MIT license.
 
 (function(root, $, EventEmitter) {
+
+    // Namespace
+    // ---------
 
     // The top-level namespace. All public Simple classes and modules will be
     // attached to this.
     var Simple = root.Simple = {};
+
+    // Views
+    // -----
 
     // Create a new view
     var View = Simple.View = function(options) {
         this.el = options.el;
         this.delegateEvents();
         this.initialize(options);
-    };
-
-    // Create a new model
-    var Model = Simple.Model = function(options) {
-        this._events = new EventEmitter();
-        this.attributes = {};
-        this.initialize(options);
-    };
-
-    // Set up inheritance for the model and view.
-    View.extend = Model.extend = function(properties) {
-        var obj = $.extend.call({}, this.prototype, properties);
-        return obj.constructor;
     };
 
     // Attach all inheritable methods to the View prototype.
@@ -71,6 +64,16 @@
         }
 
     });
+
+    // Models
+    // ------
+
+    // Create a new model
+    var Model = Simple.Model = function(options) {
+        this._events = new EventEmitter();
+        this.attributes = {};
+        this.initialize(options);
+    };
 
     $.extend(Model.prototype, {
 
@@ -126,5 +129,11 @@
         }
 
     });
+
+    // Set up inheritance for the model and view.
+    View.extend = Model.extend = function(properties) {
+        var obj = $.extend.call({}, this.prototype, properties);
+        return obj.constructor;
+    };
 
 })(this, jQuery, EventEmitter);
