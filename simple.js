@@ -79,7 +79,7 @@
 
         initialize: function() {},
 
-        // Bind an event to a callback
+        // **Bind an event to a callback**
         //
         // Accepts three arguments, where the third is optional:
         //
@@ -90,7 +90,7 @@
             this._events.addListener(event, callback, context);
         },
 
-        // Unbind an event
+        // **Unbind an event**
         //
         // Accepts two arguments:
         //
@@ -100,7 +100,7 @@
             this._events.removeListener(event, callback);
         },
 
-        // Trigger an event
+        // **Trigger an event**
         //
         // Accepts one or more arguments:
         //
