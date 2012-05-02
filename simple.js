@@ -90,8 +90,8 @@
         },
 
         // Trigger an event
-        trigger: function(event) {
-            this._events.emit(event);
+        trigger: function() {
+            this._events.emit.apply(this._events, arguments);
         },
 
         // Perform an ajax request

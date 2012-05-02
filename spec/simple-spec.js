@@ -181,6 +181,15 @@ describe("Simple", function () {
                 expect(spy).toHaveBeenCalledOn(this.model);
             });
 
+            it("allows arguments to be sent when triggering event", function() {
+                var spy = this.spy();
+
+                this.model.on("test", spy);
+                this.model.trigger("test", "Kim Joar");
+
+                expect(spy).toHaveBeenCalledOnceWith("Kim Joar");
+            });
+
             it("allows unbinding of events", function() {
                 var spy = this.spy();
 
