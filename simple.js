@@ -39,7 +39,21 @@
         // **View rendering**
         //
         // `render` is the core function that a view should override in order to
-        // populate it's element. Should always return `this`.
+        // populate the HTML element it owns. Should always return `this`.
+        //
+        // A simple example of an overridden render when using
+        // [Mustache](http://mustache.github.com/):
+        //
+        //     render: function() {
+        //       var template = "<h1>Hi {{name}}</h1>";
+        //       var data = {
+        //         name: "Kim Joar"
+        //       };
+        //
+        //       this.el.html(Mustache.to_html(template, data));
+        //       return this;
+        //     }
+        //
         render: function() {
             return this;
         },
@@ -54,7 +68,7 @@
 
         // **Event delegation**
         //
-        // Set callbacks, where `this.events` is a hash of
+        // Set callbacks, where `this.events` is a hash of<br>
         // `{"event selector": "callback"}`-pairs. For example:
         //
         //     {
@@ -124,7 +138,7 @@
         // ... can receive the second argument if we have bound the event like this:
         //
         //     model.on("test", function(name) {
-        //         console.log(name) // "Kim Joar"
+        //       console.log(name) // "Kim Joar"
         //     });
         //
         trigger: function() {
