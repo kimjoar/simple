@@ -27,18 +27,24 @@
 
         initialize: function() {},
 
+        // **View rendering**
+        //
         // `render` is the core function that a view should override in order to
         // populate it's element. Should always return `this`.
         render: function() {
             return this;
         },
 
+        // **DOM lookup**
+        //
         // jQuery delegate for element lookup, scoped to DOM elements within
         // the current view.
         DOM: function(selector) {
             return this.el.find(selector);
         },
 
+        // **Event delegation**
+        //
         // Set callbacks, where `this.events` is a hash of
         // `{"event selector": "callback"}`-pairs. For example:
         //
@@ -75,24 +81,21 @@
         this.initialize(options);
     };
 
+    // Attach all inheritable methods to the Model prototype.
     $.extend(Model.prototype, {
 
         initialize: function() {},
 
         // **Bind an event to a callback**
         //
-        // Accepts three arguments, where the third is optional:
-        //
         // - `event` is the name of the event to bind
         // - `callback` is the function which is called when the event is triggered
-        // - `context` is the scope for the callback, i.e. `this` in the callback (optional)
+        // - `context` (optional) is the scope for the callback, i.e. `this` in the callback
         on: function(event, callback, context) {
             this._events.addListener(event, callback, context);
         },
 
         // **Unbind an event**
-        //
-        // Accepts two arguments:
         //
         // - `event` is the name of the event to unbind
         // - `callback` is the function which was bound
@@ -101,8 +104,6 @@
         },
 
         // **Trigger an event**
-        //
-        // Accepts one or more arguments:
         //
         // The first argument is the name of the event to trigger, all the
         // following (optional) arguments will be passed to the bound callback.
@@ -121,7 +122,11 @@
             this._events.emit.apply(this._events, arguments);
         },
 
-        // Perform an ajax request
+        // **Perform an Ajax GET request**
+        //
+        // Will trigger the event `fetch:started` when starting, and
+        // `fetch:finished` on success or `fetch:error` if the Ajax request
+        // fails.
         fetch: function() {
             this.trigger('fetch:started');
             var model = this;
@@ -141,6 +146,8 @@
             });
         },
 
+        // **Attributes**
+        //
         // Set or get an attribute
         attr: function(name, value) {
             if (typeof value === "undefined") {
@@ -150,13 +157,16 @@
             }
         },
 
-        // Returns a copy of all the attributes
+        // Return a copy of all the attributes
         toJSON: function() {
             return $.extend({}, this.attributes);
         }
 
     });
 
+    // Inheritance
+    // -----------
+    //
     // Set up inheritance for the model and view.
     View.extend = Model.extend = function(properties) {
         var obj = $.extend.call({}, this.prototype, properties);
