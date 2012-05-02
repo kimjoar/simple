@@ -282,6 +282,17 @@ describe("Simple", function () {
 
                 expect(spy).toHaveBeenCalledOnce();
             });
+
+            it("includes response in 'fetch:error' event", function() {
+                var spy = this.spy();
+                this.model.on("fetch:error", spy);
+
+                this.model.fetch();
+
+                this.requests[0].respond(404);
+
+                expect(spy).toHaveBeenCalledOnceWith("error");
+            });
         });
 
         describe("attr", function() {

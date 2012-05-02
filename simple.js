@@ -108,8 +108,8 @@
                     }
                     model.trigger('fetch:finished');
                 },
-                error: function() {
-                    model.trigger('fetch:error');
+                error: function(jqXHR, resp) {
+                    model.trigger('fetch:error', resp);
                 }
             });
         },
