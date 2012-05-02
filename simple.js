@@ -3,6 +3,8 @@
 //     A simplistic MV* JavaScript library.
 //     Simple may be freely distributed under the MIT license.
 //
+//     Created by Kim Joar Bekkelund <mail@kimjoar.net>
+//
 //  The primary function of *Simple* is to create simple abstractions for
 //  models and views. The primary goal is to create a an easily understandable
 //  MV* JavaScript library which, happily, ignore a lot of real-world problems
