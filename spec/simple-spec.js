@@ -121,10 +121,38 @@ describe("Simple", function () {
         });
 
         describe("DOM", function() {
+            it("returns a jQuery object", function() {
+                this.view.el.html('<h1>Kim Joar</h1>');
+
+                expect(this.view.DOM("h1") instanceof jQuery).toBeTrue();
+            });
+
             it("enables DOM selector search in the views rendered html", function() {
                 this.view.el.html('<h1>Kim Joar</h1>');
 
                 expect(this.view.DOM("h1").text()).toMatch("Kim Joar");
+            });
+        });
+
+        describe("event delegation", function() {
+            it("enables binding of DOM events", function() {
+                var spy = this.spy();
+
+                var View = Simple.View.extend({
+                    events: {
+                        "click h1": "test"
+                    },
+
+                    test: spy
+                });
+
+                var view = new View({ el: $('<div></div>') });
+
+                view.el.html('<h1>Kim Joar</h1>');
+
+                view.DOM("h1").click();
+
+                expect(spy).toHaveBeenCalledOnce();
             });
         });
     });

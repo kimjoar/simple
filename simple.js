@@ -7,6 +7,7 @@
     // Create a new view
     var View = Simple.View = function(options) {
         this.el = options.el;
+        this.delegateEvents();
         this.initialize(options);
     };
 
@@ -38,6 +39,20 @@
         // the current view.
         DOM: function(selector) {
             return this.el.find(selector);
+        },
+
+        delegateEvents: function() {
+            if (!this.events) return;
+
+            for (var key in this.events) {
+                var methodName = this.events[key],
+                    method = $.proxy(this[methodName], this),
+                    match = key.match(/^(\w+)\s+(.*)$/),
+                    eventName = match[1],
+                    selector  = match[2];
+
+                this.el.on(eventName, selector, method);
+            }
         }
 
     });
@@ -90,11 +105,11 @@
             }
         },
 
-        // Returns all the attributes
+        // Returns a copy of all the attributes
         toJSON: function() {
-            // Returns a copy of the attributes
             return $.extend({}, this.attributes);
         }
+
     });
 
 })(this, jQuery, EventEmitter);
