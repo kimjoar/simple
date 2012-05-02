@@ -41,6 +41,16 @@
             return this.el.find(selector);
         },
 
+        // Set callbacks, where `this.events` is a hash of
+        // `{"event selector": "callback"}`-pairs. For example:
+        //
+        //     {
+        //       'mousedown .title': 'edit',
+        //       'click .button':    'save'
+        //     }
+        //
+        // Callbacks will be bound to the view, with `this` set properly.
+        // Uses event delegation for efficiency.
         delegateEvents: function() {
             if (!this.events) return;
 
