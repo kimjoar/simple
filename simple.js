@@ -2,6 +2,15 @@
 //
 //     A simplistic MV* JavaScript library.
 //     Simple may be freely distributed under the MIT license.
+//
+//  The primary function of *Simple* is to create simple abstractions for
+//  models and views. The primary goal is to create a an easily understandable
+//  MV* JavaScript library which, happily, ignore a lot of real-world problems
+//  in order to focus on simplicity and learnability.
+//
+//  When you understand this, go enjoy [Backbone.js](http://backbonejs.org/),
+//  [Spine.js](http://spinejs.com/) or some other library which is far more
+//  suited for real-world JavaScript applications.
 
 (function(root, $, EventEmitter) {
 
