@@ -80,16 +80,43 @@
         initialize: function() {},
 
         // Bind an event to a callback
+        //
+        // Accepts three arguments, where the third is optional:
+        //
+        // - `event` is the name of the event to bind
+        // - `callback` is the function which is called when the event is triggered
+        // - `context` is the scope for the callback, i.e. `this` in the callback (optional)
         on: function(event, callback, context) {
             this._events.addListener(event, callback, context);
         },
 
         // Unbind an event
+        //
+        // Accepts two arguments:
+        //
+        // - `event` is the name of the event to unbind
+        // - `callback` is the function which was bound
         off: function(event, callback) {
             this._events.removeListener(event, callback);
         },
 
         // Trigger an event
+        //
+        // Accepts one or more arguments:
+        //
+        // The first argument is the name of the event to trigger, all the
+        // following (optional) arguments will be passed to the bound callback.
+        //
+        // This means that an event that is triggered like this
+        //
+        //     model.trigger("test", "Kim Joar")
+        //
+        // ... can receive the second argument if we have bound the event like this:
+        //
+        //     model.on("test", function(name) {
+        //         console.log(name) // "Kim Joar"
+        //     });
+        //
         trigger: function() {
             this._events.emit.apply(this._events, arguments);
         },
