@@ -71,7 +71,19 @@
         }
     };
 
-    // Global events
+    // **Add events to Simple namespace**
+    //
+    // We can now bind events with
+    //
+    //     Simple.events.on(...)
+    //
+    // unbind events with
+    //
+    //     Simple.events.off(...)
+    //
+    // and trigger events with
+    //
+    //     Simple.events.trigger(...)
     Simple.events = Events;
 
     // Views
@@ -87,6 +99,7 @@
     // Attach all inheritable methods to the View prototype.
     $.extend(View.prototype, {
 
+        // no-op initialize
         initialize: function() {},
 
         // **View rendering**
@@ -157,8 +170,17 @@
     };
 
     // Attach all inheritable methods to the Model prototype.
+    //
+    // We also attach events which means that we can now bind, unbind and
+    // trigger events on a model, e.g.
+    //
+    //     var model = new Simple.Model();
+    //     model.on(...)
+    //     model.off(...)
+    //     model.trigger(...)
     $.extend(Model.prototype, Events, {
 
+        // no-op initialize
         initialize: function() {},
 
         // **Perform an Ajax GET request**
