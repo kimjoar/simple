@@ -23,6 +23,57 @@
     // attached to this.
     var Simple = root.Simple = {};
 
+    // Events
+    // ------
+
+    var Events = {
+        // **Bind an event to a callback**
+        //
+        // - `event` is the name of the event to bind
+        // - `callback` is the function which is called when the event is triggered
+        // - `context` (optional) is the scope for the callback, i.e. `this` in the callback
+        on: function(event, callback, context) {
+            this._events().addListener(event, callback, context);
+        },
+
+        // **Unbind an event**
+        //
+        // - `event` is the name of the event to unbind
+        // - `callback` is the function which was bound
+        off: function(event, callback) {
+            this._events().removeListener(event, callback);
+        },
+
+        // **Trigger an event**
+        //
+        // The first argument is the name of the event to trigger, all the
+        // following (optional) arguments will be passed to the bound callback.
+        //
+        // This means that an event that is triggered like this
+        //
+        //     model.trigger("test", "Kim Joar")
+        //
+        // ... can receive the second argument if we have bound the event like this:
+        //
+        //     model.on("test", function(name) {
+        //       console.log(name) // "Kim Joar"
+        //     });
+        //
+        trigger: function() {
+            var events = this._events();
+            events.emit.apply(events, arguments);
+        },
+
+        // Helper to create an EventEmitter
+        _events: function() {
+            if (!this.eventEmitter) this.eventEmitter = new EventEmitter();
+            return this.eventEmitter;
+        }
+    };
+
+    // Global events
+    Simple.events = Events;
+
     // Views
     // -----
 
@@ -101,51 +152,14 @@
 
     // Create a new model
     var Model = Simple.Model = function(options) {
-        this._events = new EventEmitter();
         this.attributes = {};
         this.initialize(options);
     };
 
     // Attach all inheritable methods to the Model prototype.
-    $.extend(Model.prototype, {
+    $.extend(Model.prototype, Events, {
 
         initialize: function() {},
-
-        // **Bind an event to a callback**
-        //
-        // - `event` is the name of the event to bind
-        // - `callback` is the function which is called when the event is triggered
-        // - `context` (optional) is the scope for the callback, i.e. `this` in the callback
-        on: function(event, callback, context) {
-            this._events.addListener(event, callback, context);
-        },
-
-        // **Unbind an event**
-        //
-        // - `event` is the name of the event to unbind
-        // - `callback` is the function which was bound
-        off: function(event, callback) {
-            this._events.removeListener(event, callback);
-        },
-
-        // **Trigger an event**
-        //
-        // The first argument is the name of the event to trigger, all the
-        // following (optional) arguments will be passed to the bound callback.
-        //
-        // This means that an event that is triggered like this
-        //
-        //     model.trigger("test", "Kim Joar")
-        //
-        // ... can receive the second argument if we have bound the event like this:
-        //
-        //     model.on("test", function(name) {
-        //       console.log(name) // "Kim Joar"
-        //     });
-        //
-        trigger: function() {
-            this._events.emit.apply(this._events, arguments);
-        },
 
         // **Perform an Ajax GET request**
         //

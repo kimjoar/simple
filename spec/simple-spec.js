@@ -101,6 +101,40 @@ describe("Simple", function () {
 
     });
 
+    describe("Events", function() {
+        it("exposes events", function() {
+            expect(Simple.events).toBeDefined();
+        });
+
+        it("allows binding and firing of events", function() {
+            var spy = this.spy();
+
+            Simple.events.on("test", spy);
+            Simple.events.trigger("test");
+
+            expect(spy).toHaveBeenCalledOnce();
+        });
+
+        it("allows arguments to be sent when triggering event", function() {
+            var spy = this.spy();
+
+            Simple.events.on("test", spy);
+            Simple.events.trigger("test", "Kim Joar");
+
+            expect(spy).toHaveBeenCalledOnceWith("Kim Joar");
+        });
+
+        it("allows unbinding of events", function() {
+            var spy = this.spy();
+
+            Simple.events.on("test", spy);
+            Simple.events.off("test", spy);
+            Simple.events.trigger("test");
+
+            expect(spy).not.toHaveBeenCalled();
+        });
+    });
+
     describe("View", function() {
         beforeEach(function() {
             this.view = new Simple.View({ el: $('<div></div>') });
