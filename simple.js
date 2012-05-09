@@ -26,7 +26,7 @@
     // Events
     // ------
 
-    // A module that can be mixed in to *any object* in order to provide it with
+    // A module that can be _mixed in_ to *any object* in order to provide it with
     // custom events. You may bind with `on`, unbind with `off`, and fire all
     // event callbacks in successtion with `trigger`.
     //
