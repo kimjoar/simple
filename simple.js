@@ -26,6 +26,15 @@
     // Events
     // ------
 
+    // A module that can be mixed in to *any object* in order to provide it with
+    // custom events. You may bind with `on`, unbind with `off`, and fire all
+    // event callbacks in successtion with `trigger`.
+    //
+    //     var object = {};
+    //     $.extend(object, Backbone.Events);
+    //     object.on('test', function(){ console.log("testing!"); });
+    //     object.trigger('test');
+    //
     var Events = {
         // **Bind an event to a callback**
         //
@@ -84,7 +93,7 @@
     // and trigger events with
     //
     //     Simple.events.trigger(...)
-    Simple.events = Events;
+    Simple.events = $.extend({}, Events);
 
     // Views
     // -----
