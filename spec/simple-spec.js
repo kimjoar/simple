@@ -30,12 +30,20 @@ describe("Simple", function () {
             var Model = Simple.Model.extend({
                 test: function() {
                     return "child1";
+                },
+
+                override: function() {
+                    return "#1";
                 }
             });
 
             var NewModel = Model.extend({
                 test2: function() {
                     return "child2";
+                },
+
+                override: function() {
+                    return "#2";
                 }
             });
 
@@ -43,6 +51,7 @@ describe("Simple", function () {
 
             expect(model.test()).toMatch("child1");
             expect(model.test2()).toMatch("child2");
+            expect(model.override()).toMatch("#2");
         });
 
         it("can call properties on parent", function() {
@@ -97,6 +106,16 @@ describe("Simple", function () {
             new Model(opts);
 
             expect(spy).toHaveBeenCalledOnceWith(opts);
+        });
+
+        it("does not add properties to parent", function() {
+            expect(Simple.Model.prototype.abc).not.toBeDefined("pre-check");
+
+            var Model = Simple.Model.extend({
+                abc: function() {}
+            });
+
+            expect(Simple.Model.prototype.abc).not.toBeDefined("post-check");
         });
 
     });

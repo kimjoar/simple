@@ -239,8 +239,23 @@
     //
     // Set up inheritance for the model and view.
     View.extend = Model.extend = function(properties) {
-        var obj = $.extend.call({}, this.prototype, properties);
-        return obj.constructor;
+        var parent = this;
+
+        // Create child constructor
+        var child = function() {
+            parent.apply(this, arguments);
+        };
+
+        // Set the prototype chain to inherit from `parent`
+        child.prototype = Object.create(parent.prototype);
+
+        // Add prototype properties, i.e.instance properties
+        $.extend(child.prototype, properties);
+
+        // The child must also be able to create new subclasses
+        child.extend = parent.extend;
+
+        return child;
     };
 
 })(this, jQuery, EventEmitter);
