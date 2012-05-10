@@ -4,7 +4,7 @@ docs:
 	@mv docs/simple.html index.html
 	@mv docs/docco.css .
 	@rm -rf docs
-	@git add .
+	@git add index.html
 	git commit -am "Updating docs" && git push origin gh-pages
 	@git checkout master
 
