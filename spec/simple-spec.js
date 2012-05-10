@@ -26,6 +26,21 @@ describe("Simple", function () {
             expect(model.test).toBeDefined();
         });
 
+        it("has correct instanceof when extending Simple.Model", function() {
+            var Model = Simple.Model.extend({});
+            var model = new Model();
+
+            expect(model instanceof Simple.Model).toBeTrue();
+        });
+
+        it("has correct instanceof when extending child", function() {
+            var Model = Simple.Model.extend({});
+            var Child = Model.extend({});
+            var child = new Child();
+
+            expect(child instanceof Simple.Model).toBeTrue();
+        });
+
         it("enables child creation from a created child", function() {
             var Model = Simple.Model.extend({
                 test: function() {
