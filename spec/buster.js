@@ -3,12 +3,10 @@ var config = module.exports;
 config["My tests"] = {
     rootPath: "../",
     environment: "browser",
-    sources: [
+    libs: [
         "lib/jquery-1.7.2.js",
-        "lib/EventEmitter.js",
-        "simple.js"
+        "lib/EventEmitter.js"
     ],
-    tests: [
-        "spec/*-spec.js"
-    ]
+    src: ["simple.js"],
+    specs: ["spec/*-spec.js"]
 };
