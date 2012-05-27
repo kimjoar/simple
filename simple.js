@@ -194,10 +194,14 @@
 
         // **Perform an Ajax GET request**
         //
-        // Will trigger the event `fetch:started` when starting, and
-        // `fetch:finished` on success or `fetch:error` if the Ajax request
-        // fails.
-        fetch: function(successCallback, errorCallback) {
+        // Will trigger the event `fetch:started`  when starting. On success or
+        // failure either an event is triggered or a callback is executed if
+        // one is passed in the options hash.
+        //
+        // - Success: The event `fetch:finished` or the `success` callback
+        // - Failure: The event `fetch:error` or the `error` callback
+        fetch: function(options) {
+            options = options || {};
             this.trigger('fetch:started');
             var model = this;
 
@@ -208,15 +212,15 @@
                     for (var prop in data) {
                         model.attr(prop, data[prop]);
                     }
-                    if (typeof successCallback !== "undefined") {
-                        successCallback();
+                    if (typeof options.success !== "undefined") {
+                        options.success();
                     } else {
                         model.trigger('fetch:finished');
                     }
                 },
                 error: function(jqXHR, resp) {
-                    if (typeof errorCallback !== "undefined") {
-                        errorCallback();
+                    if (typeof options.error !== "undefined") {
+                        options.error();
                     } else {
                         model.trigger('fetch:error', resp);
                     }

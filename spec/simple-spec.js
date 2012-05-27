@@ -336,7 +336,7 @@ describe("Simple", function () {
 
                 this.model.on("fetch:finished", eventSpy);
 
-                this.model.fetch(callbackSpy);
+                this.model.fetch({ success: callbackSpy });
 
                 this.requests[0].respond();
 
@@ -371,7 +371,7 @@ describe("Simple", function () {
 
                 this.model.on("fetch:error", eventSpy);
 
-                this.model.fetch(this.spy(), callbackSpy);
+                this.model.fetch({ error: callbackSpy });
 
                 this.requests[0].respond(404);
 
