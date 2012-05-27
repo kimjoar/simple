@@ -207,7 +207,7 @@
 
             $.ajax({
                 url: model.url,
-                dataType: "json",
+                dataType: options.dataType || "json",
                 success: function(data) {
                     for (var prop in data) {
                         model.attr(prop, data[prop]);
