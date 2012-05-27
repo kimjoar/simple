@@ -330,6 +330,20 @@ describe("Simple", function () {
                 expect(spy).toHaveBeenCalledOnce();
             });
 
+            it("executes success callback if one is set and fetch is successful", function() {
+                var callbackSpy = this.spy();
+                var eventSpy = this.spy();
+
+                this.model.on("fetch:finished", eventSpy);
+
+                this.model.fetch(callbackSpy);
+
+                this.requests[0].respond();
+
+                expect(callbackSpy).toHaveBeenCalledOnce();
+                expect(eventSpy).not.toHaveBeenCalled();
+            });
+
             it("sets attributes on success", function() {
                 this.model.fetch();
 
@@ -349,6 +363,20 @@ describe("Simple", function () {
                 this.requests[0].respond(404);
 
                 expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("executes error callback if one is set and fetch is not successful", function() {
+                var callbackSpy = this.spy();
+                var eventSpy = this.spy();
+
+                this.model.on("fetch:error", eventSpy);
+
+                this.model.fetch(this.spy(), callbackSpy);
+
+                this.requests[0].respond(404);
+
+                expect(callbackSpy).toHaveBeenCalledOnce();
+                expect(eventSpy).not.toHaveBeenCalled();
             });
 
             it("includes response in 'fetch:error' event", function() {

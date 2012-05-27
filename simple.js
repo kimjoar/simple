@@ -197,7 +197,7 @@
         // Will trigger the event `fetch:started` when starting, and
         // `fetch:finished` on success or `fetch:error` if the Ajax request
         // fails.
-        fetch: function() {
+        fetch: function(successCallback, errorCallback) {
             this.trigger('fetch:started');
             var model = this;
 
@@ -208,10 +208,18 @@
                     for (var prop in data) {
                         model.attr(prop, data[prop]);
                     }
-                    model.trigger('fetch:finished');
+                    if (typeof successCallback !== "undefined") {
+                        successCallback();
+                    } else {
+                        model.trigger('fetch:finished');
+                    }
                 },
                 error: function(jqXHR, resp) {
-                    model.trigger('fetch:error', resp);
+                    if (typeof errorCallback !== "undefined") {
+                        errorCallback();
+                    } else {
+                        model.trigger('fetch:error', resp);
+                    }
                 }
             });
         },
