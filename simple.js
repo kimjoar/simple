@@ -267,13 +267,15 @@
 
         // Create child constructor
         var child = function() {
+            // … which only job is to call the parent construtor with all
+            // the arguments
             parent.apply(this, arguments);
         };
 
         // Set the prototype chain to inherit from `parent`
         child.prototype = Object.create(parent.prototype);
 
-        // Add prototype properties, i.e.instance properties
+        // Add prototype properties, i.e. instance properties
         $.extend(child.prototype, properties);
 
         // The child must also be able to create new subclasses
