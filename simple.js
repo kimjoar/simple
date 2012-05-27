@@ -200,6 +200,18 @@
         //
         // - Success: The event `fetch:finished` or the `success` callback
         // - Failure: The event `fetch:error` or the `error` callback
+        //
+        // On success the received properties are always set on the model,
+        // regardless of whether event or callback is performed.
+        //
+        // Example with success callback:
+        //
+        //     var model = new Simple.Model();
+        //     model.fetch({
+        //       success: function(data) {
+        //         // we have a success
+        //       }
+        //     });
         fetch: function(options) {
             options = options || {};
             this.trigger('fetch:started');
@@ -213,7 +225,7 @@
                         model.attr(prop, data[prop]);
                     }
                     if (typeof options.success !== "undefined") {
-                        options.success();
+                        options.success(data);
                     } else {
                         model.trigger('fetch:finished');
                     }

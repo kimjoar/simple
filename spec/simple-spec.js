@@ -338,9 +338,12 @@ describe("Simple", function () {
 
                 this.model.fetch({ success: callbackSpy });
 
-                this.requests[0].respond();
+                var data = { id: 12, name: "Kim Joar" };
 
-                expect(callbackSpy).toHaveBeenCalledOnce();
+                this.requests[0].respond(200, { "Content-Type": "application/json" },
+                                 JSON.stringify(data));
+
+                expect(callbackSpy).toHaveBeenCalledOnceWith(data);
                 expect(eventSpy).not.toHaveBeenCalled();
             });
 
