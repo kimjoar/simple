@@ -15,6 +15,6 @@ test:
 	@buster test
 
 lines:
-	cat simple.js | grep -v "//" | grep -v ^\$$ | wc -l
+	@cat simple.js | grep -v "//" | grep -v ^\$$ | wc -l
 
 .PHONY: test docs lines
