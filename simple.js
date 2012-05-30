@@ -34,6 +34,7 @@
     //     $.extend(object, Simple.Events);
     //     object.on('test', function(){ console.log("testing!"); });
     //     object.trigger('test');
+    //     object.off('test');
     //
     var Events = {
         // **Bind an event to a callback**
