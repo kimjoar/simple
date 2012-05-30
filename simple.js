@@ -106,7 +106,13 @@
     // Create a new view
     var View = Simple.View = function(options) {
         this.el = options.el;
+
+        // All events specified in the `events` hash will be delegated when the
+        // view is initialized.
         this.delegateEvents();
+
+        // On initialization the input is passed through to the `initialize`
+        // method, which can be overriden when creating new views.
         this.initialize(options);
     };
 
