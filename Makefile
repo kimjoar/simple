@@ -8,6 +8,9 @@ docs:
 	git commit -am "Updating docs" && git push origin gh-pages
 	@git checkout master
 
+clean:
+	@rm -rf docs
+
 test:
 	@buster test
 
