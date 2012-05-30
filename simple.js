@@ -48,9 +48,13 @@
         // **Unbind an event**
         //
         // - `event` is the name of the event to unbind
-        // - `callback` is the function which was bound
+        // - `callback` (optional) is the function which was bound
         off: function(event, callback) {
-            this._events().removeListener(event, callback);
+            if (typeof callback === "undefined") {
+                this._events().removeAllListeners(event);
+            } else {
+                this._events().removeListener(event, callback);
+            }
         },
 
         // **Trigger an event**

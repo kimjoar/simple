@@ -158,11 +158,21 @@ describe("Simple", function () {
             expect(spy).toHaveBeenCalledOnceWith("Kim Joar");
         });
 
-        it("allows unbinding of events", function() {
+        it("allows unbinding of events with listener specified", function() {
             var spy = this.spy();
 
             Simple.events.on("test", spy);
             Simple.events.off("test", spy);
+            Simple.events.trigger("test");
+
+            expect(spy).not.toHaveBeenCalled();
+        });
+
+        it("allows unbinding of all events when no listener is specified", function() {
+            var spy = this.spy();
+
+            Simple.events.on("test", spy);
+            Simple.events.off("test");
             Simple.events.trigger("test");
 
             expect(spy).not.toHaveBeenCalled();
