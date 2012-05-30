@@ -11,4 +11,7 @@ docs:
 test:
 	@buster test
 
-.PHONY: test docs
+lines:
+	cat simple.js | grep -v "//" | grep -v ^\$$ | wc -l
+
+.PHONY: test docs lines
