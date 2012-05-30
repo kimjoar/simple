@@ -26,12 +26,12 @@
     // Events
     // ------
 
-    // A module that can be _mixed in_ to *any object* in order to provide it with
-    // custom events. You may bind with `on`, unbind with `off`, and fire all
-    // event callbacks in successtion with `trigger`.
+    // A module that can be *mixed in* to *any* object in order to provide it with
+    // custom events. You may bind events with with `on`, unbind with `off`, and
+    // fire all event callbacks in successtion with `trigger`:
     //
     //     var object = {};
-    //     $.extend(object, Backbone.Events);
+    //     $.extend(object, Simple.Events);
     //     object.on('test', function(){ console.log("testing!"); });
     //     object.trigger('test');
     //
@@ -73,7 +73,7 @@
             events.emit.apply(events, arguments);
         },
 
-        // Helper to create an EventEmitter
+        // Helper to create an EventEmitter, which is the library used for events.
         _events: function() {
             if (!this.eventEmitter) this.eventEmitter = new EventEmitter();
             return this.eventEmitter;
@@ -219,7 +219,7 @@
 
             $.ajax({
                 url: model.url,
-                dataType: options.dataType || "json",
+                dataType: options.dataType || model.dataType || "json",
                 success: function(data) {
                     for (var prop in data) {
                         model.attr(prop, data[prop]);
