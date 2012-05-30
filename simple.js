@@ -186,6 +186,9 @@
     // Create a new model
     var Model = Simple.Model = function(options) {
         this.attributes = {};
+
+        // On initialization the input is passed through to the `initialize`
+        // method, which can be overriden when creating new models.
         this.initialize(options);
     };
 
