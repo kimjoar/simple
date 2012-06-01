@@ -193,8 +193,8 @@ describe("Simple", function () {
         });
 
         describe("render", function() {
-            it("should return an instance of the view", function() {
-                expect(this.view.render()).toBe(this.view);
+            it("is defined", function() {
+                expect(this.view.render).toBeDefined();
             });
         });
 

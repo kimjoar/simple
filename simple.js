@@ -125,7 +125,7 @@
         // **View rendering**
         //
         // `render` is the core function that a view should override in order to
-        // populate the HTML element it owns. Should always return `this`.
+        // populate the HTML element it owns.
         //
         // A simple example of an overridden render when using
         // [Mustache](http://mustache.github.com/):
@@ -137,12 +137,9 @@
         //       };
         //
         //       this.el.html(Mustache.to_html(template, data));
-        //       return this;
         //     }
         //
-        render: function() {
-            return this;
-        },
+        render: function() {},
 
         // **DOM lookup**
         //
@@ -183,7 +180,6 @@
                 this.el.on(eventName, selector, method);
             }
         }
-
     });
 
     // Models
