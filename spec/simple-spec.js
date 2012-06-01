@@ -213,7 +213,7 @@ describe("Simple", function () {
         });
 
         describe("event delegation", function() {
-            it("enables binding of DOM events", function() {
+            it("binds DOM events to specified selector", function() {
                 var spy = this.spy();
 
                 var View = Simple.View.extend({
@@ -229,6 +229,26 @@ describe("Simple", function () {
                 view.el.html('<h1>Kim Joar</h1>');
 
                 view.DOM("h1").click();
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("binds DOM events to `el` when no selector is specified", function() {
+                var spy = this.spy();
+
+                var View = Simple.View.extend({
+                    events: {
+                        "click": "test"
+                    },
+
+                    test: spy
+                });
+
+                var view = new View({ el: $('<div></div>') });
+
+                view.el.html('<h1>Kim Joar</h1>');
+
+                view.el.click();
 
                 expect(spy).toHaveBeenCalledOnce();
             });

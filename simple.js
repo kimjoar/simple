@@ -162,6 +162,12 @@
         //       'click .button':    'save'
         //     }
         //
+        // To specify an event directly on `el`, leave the selector blank:
+        //
+        //     {
+        //       'submit': 'save'
+        //     }
+        //
         // Callbacks will be bound to the view, with `this` set properly.
         // Uses event delegation for efficiency.
         delegateEvents: function() {
@@ -170,7 +176,7 @@
             for (var key in this.events) {
                 var methodName = this.events[key],
                     method = $.proxy(this[methodName], this),
-                    match = key.match(/^(\w+)\s+(.*)$/),
+                    match = key.match(/^(\w+)(:?\s+(.*))?$/),
                     eventName = match[1],
                     selector  = match[2];
 
