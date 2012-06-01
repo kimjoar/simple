@@ -264,6 +264,18 @@ describe("Simple", function () {
             expect(this.model instanceof Simple.Model).toBeTrue();
         });
 
+        it("sets attributes on initialization", function() {
+            var options = {
+              name: "Kim Joar",
+              work: "BEKK"
+            };
+
+            var model = new Simple.Model(options);
+
+            expect(model.attr("name")).toEqual("Kim Joar");
+            expect(model.attr("work")).toEqual("BEKK");
+        });
+
         it("enables creation of new models", function() {
             expect(Simple.Model.extend).toBeDefined();
         });
