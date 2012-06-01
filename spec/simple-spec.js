@@ -1,7 +1,7 @@
 buster.spec.expose();
 
 describe("Simple", function () {
-    it("should be defined", function() {
+    it("is defined", function() {
         expect(Simple).toBeDefined();
     });
 
