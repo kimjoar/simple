@@ -177,6 +177,25 @@ describe("Simple", function () {
 
             expect(spy).not.toHaveBeenCalled();
         });
+
+        it("allows specifying which scope the unbind should have", function() {
+            var spy = this.spy(),
+                scope = {},
+                scope2 = {};
+
+            Simple.events.on("test", spy, scope);
+            Simple.events.on("test", spy, scope2);
+            Simple.events.off("test", spy, scope2);
+            Simple.events.trigger("test");
+
+            expect(spy).toHaveBeenCalledOn(scope);
+            expect(spy).toHaveBeenCalledOnce();
+
+            Simple.events.off("test", spy, scope);
+            Simple.events.trigger("test");
+
+            expect(spy).toHaveBeenCalledOnce();
+        });
     });
 
     describe("View", function() {

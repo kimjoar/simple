@@ -50,11 +50,12 @@
         //
         // - `event` is the name of the event to unbind
         // - `callback` (optional) is the function which was bound
-        off: function(event, callback) {
+        // - `context` (optional) is the scope the event must have to be removed
+        off: function(event, callback, context) {
             if (typeof callback === "undefined") {
                 this._events().removeAllListeners(event);
             } else {
-                this._events().removeListener(event, callback);
+                this._events().removeListener(event, callback, context);
             }
         },
 
