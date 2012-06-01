@@ -191,6 +191,8 @@
 
     // Create a new model
     var Model = Simple.Model = function(options) {
+        // The model's attributes default to the options specified when
+        // initializing a model or an empty hash if none is specified.
         this.attributes = options || {};
 
         // On initialization the input is passed through to the `initialize`
