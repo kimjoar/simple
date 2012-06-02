@@ -271,9 +271,7 @@
                 url: model.url,
                 dataType: options.dataType || model.dataType || "json",
                 success: function(data) {
-                    for (var prop in data) {
-                        model.attr(prop, data[prop]);
-                    }
+                    model.attrs(data);
                     if (typeof options.success !== "undefined") {
                         options.success(data);
                     } else {
@@ -303,9 +301,13 @@
             }
         },
 
-        // Return a copy of all the attributes
-        toJSON: function() {
-            return $.extend({}, this.attributes);
+        // Set or get all attributes
+        attrs: function(attributes) {
+            if (typeof attributes === "undefined") {
+                return $.extend({}, this.attributes);
+            } else {
+                $.extend(this.attributes, attributes);
+            }
         }
 
     });

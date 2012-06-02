@@ -575,16 +575,38 @@ describe("Simple", function () {
             });
         });
 
-        describe("toJSON", function() {
-            it("returns all set attributes", function() {
+        describe("attrs", function() {
+            it("returns all attributes when no arguments", function() {
                 var model = new Simple.Model();
 
                 model.attr("name", "Kim Joar");
                 model.attr("employer", "BEKK");
 
-                var data = model.toJSON();
+                var data = model.attrs();
                 expect(data.name).toMatch("Kim Joar");
                 expect(data.employer).toMatch("BEKK");
+            });
+
+            it("sets all attributes", function() {
+                var model = new Simple.Model();
+                var attributes = {
+                    name: "Kim Joar",
+                    work: "BEKK"
+                };
+
+                model.attrs(attributes);
+                expect(model.attr("name")).toMatch("Kim Joar");
+                expect(model.attr("work")).toMatch("BEKK");
+            });
+
+            it("overwrites existing attributes", function() {
+                var model = new Simple.Model();
+
+                model.attr("name", "Kim");
+                expect(model.attr("name")).toMatch("Kim");
+
+                model.attrs({ name: "Kim Joar" });
+                expect(model.attr("name")).toMatch("Kim Joar");
             });
         });
     });
