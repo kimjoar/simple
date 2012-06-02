@@ -10,10 +10,14 @@
 // MV* JavaScript library which, happily, ignore a lot of real-world problems
 // in order to focus on simplicity and learnability.
 //
-// Simple.js is just over 100
+// Simple.js is (currently) 111
 // [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
 // lines of code. The project is
 // [hosted on Github](https://github.com/kjbekkelund/simple).
+//
+// Simple.js depends on [jQuery](http://jquery.com/) and
+// [EventEmitter](https://github.com/Wolfy87/EventEmitter). Remember to include
+// these before you include Simple.js itself.
 //
 // When you understand this, go enjoy [Backbone.js](http://backbonejs.org/),
 // [Spine.js](http://spinejs.com/) or some other library which is far more
