@@ -108,6 +108,10 @@
 
     // Views
     // -----
+    //
+    // You should start by reading
+    // [A view’s responsibility](http://open.bekk.no/a-views-responsibility/)
+    // to understand the philosophy these views are based on.
 
     // Create a new view
     var View = Simple.View = function(options) {
@@ -130,8 +134,13 @@
 
         // **View rendering**
         //
-        // `render` is the core function that a view should override in order to
-        // populate the HTML element it owns.
+        // `render` is responsible for populating the view's HTML element.
+        // The default implementation is a no-op, which means that:
+        //
+        // 1. A view must override this function with its specific view
+        //    rendering implemenation.
+        // 2. Simple.js works with whatever HTML templating method you like (as
+        //    long as it updates `view.el`, of course).
         //
         // A simple example of an overridden render when using
         // [Mustache](http://mustache.github.com/):
@@ -150,7 +159,15 @@
         // **DOM lookup**
         //
         // jQuery delegate for element lookup, scoped to DOM elements within
-        // the current view.
+        // the current view. Example:
+        //
+        //     var view = new Simple.View({ el: $(".user") });
+        //
+        //     // instead of
+        //     $(".user form")
+        //
+        //     // we should now do
+        //     view.DOM("form")
         DOM: function(selector) {
             return this.el.find(selector);
         },
