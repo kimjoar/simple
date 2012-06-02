@@ -1,11 +1,11 @@
-//     Simple
+//     Simple.js
 //
 //     A simplistic MV* JavaScript library.
 //     Simple may be freely distributed under the MIT license.
 //
 //     Created by Kim Joar Bekkelund <mail@kimjoar.net>
 //
-// The primary function of *Simple* is to create simple abstractions for
+// The primary function of *Simple.js* is to create simple abstractions for
 // models and views. The primary goal is to create an easily understandable
 // MV* JavaScript library which, happily, ignore a lot of real-world problems
 // in order to focus on simplicity and learnability.
@@ -14,7 +14,7 @@
 // [Spine.js](http://spinejs.com/) or some other library which is far more
 // suited for real-world JavaScript applications.
 //
-// The project is [hosted on Github](https://github.com/kjbekkelund/simple).
+// Simple.js is [hosted on Github](https://github.com/kjbekkelund/simple).
 
 (function(root, $, EventEmitter) {
 
