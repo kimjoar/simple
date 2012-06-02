@@ -528,6 +528,16 @@ describe("Simple", function () {
                 expect(this.model.attr("name")).toMatch("Kim Joar");
             });
 
+            it("sends all attributes", function() {
+                this.model.attr("name", "Kim Joar");
+                this.model.attr("work", "BEKK");
+
+                this.model.save();
+
+                var body = JSON.parse(this.requests[0].requestBody);
+                expect(body.name).toEqual("Kim Joar");
+                expect(body.work).toEqual("BEKK");
+            });
 
             it("triggers 'save:error' on failure", function() {
                 var spy = this.spy();
