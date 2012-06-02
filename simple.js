@@ -213,7 +213,7 @@
 
         // **Perform an Ajax GET request**
         //
-        // Will trigger the event `fetch:started`  when starting. On success or
+        // Will trigger the event `fetch:started` when starting. On success or
         // failure either an event is triggered or a callback is executed if
         // one is passed in the options hash.
         //
@@ -232,11 +232,43 @@
         //       }
         //     });
         fetch: function(options) {
-            options = options || {};
-            this.trigger('fetch:started');
+            this._performRequest("fetch", options || {}, {});
+        },
+
+        // **Perform an Ajax POST request**
+        //
+        // Will trigger the event `save:started` when starting. On success or
+        // failure either an event is triggered or a callback is executed if
+        // one is passed in the options hash.
+        //
+        // - Success: The event `save:finished` or the `success` callback
+        // - Failure: The event `save:error` or the `error` callback
+        //
+        // On success the received properties are always set on the model,
+        // regardless of whether event or callback is performed.
+        //
+        // Example with success callback:
+        //
+        //     var model = new Simple.Model();
+        //     model.save({
+        //       success: function(data) {
+        //         // we have a success
+        //       }
+        //     });
+        save: function(options) {
+            this._performRequest("save", options || {}, {
+              type: "POST",
+              data: JSON.stringify(this.attributes),
+              contentType: 'application/json'
+            });
+        },
+
+        // Helper for AJAX requests
+        _performRequest: function(type, options, additionalParams) {
+            this.trigger(type + ':started');
             var model = this;
 
-            $.ajax({
+            var params = {
                 url: model.url,
                 dataType: options.dataType || model.dataType || "json",
                 success: function(data) {
@@ -246,17 +278,19 @@
                     if (typeof options.success !== "undefined") {
                         options.success(data);
                     } else {
-                        model.trigger('fetch:finished');
+                        model.trigger(type + ':finished');
                     }
                 },
                 error: function(jqXHR, resp) {
                     if (typeof options.error !== "undefined") {
                         options.error();
                     } else {
-                        model.trigger('fetch:error', resp);
+                        model.trigger(type + ':error', resp);
                     }
                 }
-            });
+            };
+
+            $.ajax($.extend(additionalParams, params));
         },
 
         // **Attributes**

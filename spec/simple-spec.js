@@ -455,6 +455,106 @@ describe("Simple", function () {
             });
         });
 
+        describe("save", function() {
+            beforeEach(function() {
+                var Model = Simple.Model.extend({
+                    url: "/test"
+                });
+                this.model = new Model();
+
+                this.fakeXhr = sinon.useFakeXMLHttpRequest();
+                var requests = this.requests = [];
+
+                this.fakeXhr.onCreate = function (xhr) {
+                    requests.push(xhr);
+                };
+            });
+
+            afterEach(function() {
+                this.fakeXhr.restore();
+            });
+
+            it("performs an ajax POST request to the model's url", function() {
+                this.model.save();
+
+                expect(this.requests.length).toBe(1);
+                expect(this.requests[0].url).toMatch(this.model.url);
+                expect(this.requests[0].method).toBe("POST");
+            });
+
+            it("triggers 'save:started' before request", function() {
+                var spy = this.spy();
+                this.model.on("save:started", spy);
+
+                this.model.save();
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("triggers 'save:finished' on success", function() {
+                var spy = this.spy();
+                this.model.on("save:finished", spy);
+
+                this.model.save();
+                this.requests[0].respond();
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("executes success callback if one is set and save is successful", function() {
+                var callbackSpy = this.spy();
+                var eventSpy = this.spy();
+
+                this.model.on("save:finished", eventSpy);
+
+                this.model.save({ success: callbackSpy });
+
+                var data = { id: 12, name: "Kim Joar" };
+
+                this.requests[0].respond(200, { "Content-Type": "application/json" },
+                                 JSON.stringify(data));
+
+                expect(callbackSpy).toHaveBeenCalledOnceWith(data);
+                expect(eventSpy).not.toHaveBeenCalled();
+            });
+
+            it("sets attributes on success", function() {
+                this.model.save();
+
+                this.requests[0].respond(200, { "Content-Type": "application/json" },
+                                 '{ "id": 12, "name": "Kim Joar" }');
+
+                expect(this.model.attr("id")).toMatch(12);
+                expect(this.model.attr("name")).toMatch("Kim Joar");
+            });
+
+
+            it("triggers 'save:error' on failure", function() {
+                var spy = this.spy();
+                this.model.on("save:error", spy);
+
+                this.model.save();
+                this.requests[0].respond(404);
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("executes error callback if one is set and save is not successful", function() {
+                var callbackSpy = this.spy();
+                var eventSpy = this.spy();
+
+                this.model.on("save:error", eventSpy);
+
+                this.model.save({ error: callbackSpy });
+
+                this.requests[0].respond(404);
+
+                expect(callbackSpy).toHaveBeenCalledOnce();
+                expect(eventSpy).not.toHaveBeenCalled();
+            });
+
+        });
+
         describe("attr", function() {
             it("can get and set a paramter", function() {
                 var model = new Simple.Model();
