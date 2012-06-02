@@ -287,7 +287,7 @@
                 }
             };
 
-            $.ajax($.extend(additionalParams, params));
+            $.ajax($.extend(params, additionalParams));
         },
 
         // **Attributes**
