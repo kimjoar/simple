@@ -5,14 +5,16 @@
 //
 //     Created by Kim Joar Bekkelund <mail@kimjoar.net>
 //
-//  The primary function of *Simple* is to create simple abstractions for
-//  models and views. The primary goal is to create a an easily understandable
-//  MV* JavaScript library which, happily, ignore a lot of real-world problems
-//  in order to focus on simplicity and learnability.
+// The primary function of *Simple* is to create simple abstractions for
+// models and views. The primary goal is to create an easily understandable
+// MV* JavaScript library which, happily, ignore a lot of real-world problems
+// in order to focus on simplicity and learnability.
 //
-//  When you understand this, go enjoy [Backbone.js](http://backbonejs.org/),
-//  [Spine.js](http://spinejs.com/) or some other library which is far more
-//  suited for real-world JavaScript applications.
+// When you understand this, go enjoy [Backbone.js](http://backbonejs.org/),
+// [Spine.js](http://spinejs.com/) or some other library which is far more
+// suited for real-world JavaScript applications.
+//
+// The project is [hosted on Github](https://github.com/kjbekkelund/simple).
 
 (function(root, $, EventEmitter) {
 
