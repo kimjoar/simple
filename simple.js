@@ -327,7 +327,7 @@
             }
         },
 
-        // Set or get all attributes
+        // Set several or get all attributes
         attrs: function(attributes) {
             if (typeof attributes === "undefined") {
                 return $.extend({}, this.attributes);
