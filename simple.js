@@ -232,7 +232,7 @@
         //       }
         //     });
         fetch: function(options) {
-            this._performRequest("fetch", options || {}, {});
+            this._performRequest("fetch", this, options || {}, {});
         },
 
         // **Perform an Ajax POST request**
@@ -256,7 +256,7 @@
         //       }
         //     });
         save: function(options) {
-            this._performRequest("save", options || {}, {
+            this._performRequest("save", this, options || {}, {
               type: "POST",
               data: JSON.stringify(this.attributes),
               contentType: 'application/json'
@@ -264,9 +264,8 @@
         },
 
         // Helper for AJAX requests
-        _performRequest: function(type, options, additionalParams) {
+        _performRequest: function(type, model, options, additionalParams) {
             this.trigger(type + ':started');
-            var model = this;
 
             var params = {
                 url: model.url,
