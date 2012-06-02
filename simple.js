@@ -14,7 +14,10 @@
 // [Spine.js](http://spinejs.com/) or some other library which is far more
 // suited for real-world JavaScript applications.
 //
-// Simple.js is [hosted on Github](https://github.com/kjbekkelund/simple).
+// Simple.js is just over 100
+// [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
+// lines of code. The project is
+// [hosted on Github](https://github.com/kjbekkelund/simple).
 
 (function(root, $, EventEmitter) {
 
