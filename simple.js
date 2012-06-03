@@ -330,6 +330,8 @@
         // Set several or get all attributes
         attrs: function(attributes) {
             if (typeof attributes === "undefined") {
+                // Return a copy of the attributes as we want all adding and
+                // removing of attributes to go through `attr` and `attrs`.
                 return $.extend({}, this.attributes);
             } else {
                 $.extend(this.attributes, attributes);
