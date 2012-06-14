@@ -13,4 +13,7 @@ test:
 lines:
 	@cloc simple.js
 
+min:
+	@uglifyjs simple.js > simple.min.js
+
 .PHONY: test docs lines
