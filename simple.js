@@ -115,8 +115,12 @@
     // [A view’s responsibility](http://open.bekk.no/a-views-responsibility/)
     // to understand the philosophy these views are based on.
 
-    // Create a new view
+    // Create a new view. This constructor is called whenever a view is
+    // initialized, so we can use it set up some basic state that is common
+    // among all views.
     var View = Simple.View = function(options) {
+        // We always expect to receive the view's `el`, so we just set it
+        // right away.
         this.el = options.el;
 
         // All events specified in the `events` hash will be delegated when the
@@ -210,7 +214,9 @@
     // Models
     // ------
 
-    // Create a new model
+    // Create a new model. This constructor is called whenever a model is
+    // initialized, so we can use it set up some basic state that is common
+    // among all models.
     var Model = Simple.Model = function(options) {
         // The model's attributes default to the options specified when
         // initializing a model or an empty hash if none is specified.
