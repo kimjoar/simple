@@ -9,7 +9,7 @@
 // models and views. It aims to be a JavaScript MV* library which is both easy
 // to understand and easy to extend.
 //
-// Simple.js is (currently) 111
+// Simple.js is (currently) 113
 // [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
 // lines of code. The project is
 // [hosted on Github](https://github.com/kjbekkelund/simple).
@@ -340,7 +340,10 @@
 
     // Inheritance
     // -----------
-    //
+
+    // Shared empty constructor function to aid in prototype-chain creation.
+    var ctor = function() {};
+
     // Set up inheritance for the model and view.
     View.extend = Model.extend = function(properties) {
         var parent = this;
@@ -353,7 +356,8 @@
         };
 
         // Set the prototype chain to inherit from `parent`
-        child.prototype = Object.create(parent.prototype);
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
 
         // Add prototype properties, i.e. instance properties
         $.extend(child.prototype, properties);
