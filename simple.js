@@ -6,9 +6,8 @@
 //     Created by Kim Joar Bekkelund <mail@kimjoar.net>
 //
 // The primary function of *Simple.js* is to create simple abstractions for
-// models and views. The primary goal is to create an easily understandable
-// MV* JavaScript library which, happily, ignore a lot of real-world problems
-// in order to focus on simplicity and learnability.
+// models and views. It aims to be a JavaScript MV* library which is both easy
+// to understand and easy to extend.
 //
 // Simple.js is (currently) 111
 // [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
@@ -19,9 +18,8 @@
 // [EventEmitter](https://github.com/Wolfy87/EventEmitter). Remember to include
 // these before you include Simple.js itself.
 //
-// When you understand this, go enjoy [Backbone.js](http://backbonejs.org/),
-// [Spine.js](http://spinejs.com/) or some other library which is far more
-// suited for real-world JavaScript applications.
+// This library is heavily inspired by [Backbone.js](http://backbonejs.org/)
+// and [Spine.js](http://spinejs.com/).
 
 (function(root, $, EventEmitter) {
 
