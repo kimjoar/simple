@@ -42,7 +42,7 @@
     //     object.trigger('test');
     //     object.off('test');
     //
-    var Events = {
+    var Events = Simple.Events = {
         // **Bind an event to a callback**
         //
         // - `event` is the name of the event to bind

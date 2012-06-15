@@ -138,6 +138,7 @@ describe("Simple", function () {
     describe("Events", function() {
         it("exposes events", function() {
             expect(Simple.events).toBeDefined();
+            expect(Simple.Events).toBeDefined();
         });
 
         it("allows binding and firing of events", function() {
