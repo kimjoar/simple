@@ -9,19 +9,18 @@
 // models and views. It aims to be a JavaScript MV* library which is both easy
 // to understand and easy to extend.
 //
-// Simple.js is (currently) 113
+// Simple.js is (currently) 119
 // [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
 // lines of code. The project is
 // [hosted on Github](https://github.com/kjbekkelund/simple).
 //
-// Simple.js depends on [jQuery](http://jquery.com/) and
-// [EventEmitter](https://github.com/Wolfy87/EventEmitter). Remember to include
-// these before you include Simple.js itself.
+// Simple.js depends on [jQuery](http://jquery.com/). Remember to include it
+// before you include Simple.js itself.
 //
 // This library is heavily inspired by [Backbone.js](http://backbonejs.org/)
 // and [Spine.js](http://spinejs.com/).
 
-(function(root, $, EventEmitter) {
+(function(root, $) {
 
     // Namespace
     // ---------
@@ -48,9 +47,12 @@
         //
         // - `event` is the name of the event to bind
         // - `callback` is the function which is called when the event is triggered
-        // - `context` (optional) is the scope for the callback, i.e. `this` in the callback
+        // - `context` (optional) is the scope for the callback, i.e. the
+        //   meaning of `this` in the callback
         on: function(event, callback, context) {
-            this._events().addListener(event, callback, context);
+          var callbacks = this._callbacks || (this._callbacks = {});
+          var events = callbacks[event] || (callbacks[event] = []);
+          events.push({ callback: callback, context: context });
         },
 
         // **Unbind an event**
@@ -59,11 +61,24 @@
         // - `callback` (optional) is the function which was bound
         // - `context` (optional) is the scope the event must have to be removed
         off: function(event, callback, context) {
-            if (typeof callback === "undefined") {
-                this._events().removeAllListeners(event);
-            } else {
-                this._events().removeListener(event, callback, context);
+          // If neither callback nor context is specified we remove all
+          // callbacks for an event.
+          if (!callback && !context) {
+            delete this._callbacks[event];
+          }
+
+          // If there are callbacks specified for an event, we loop through
+          // them and remove the callback if
+          //
+          // * callback and context matches
+          // * callback matches and context is not specified
+          // * callback is not specified and context matches
+          var events = this._callbacks[event] || [];
+          for (var i = 0; i < events.length; i++) {
+            if (!(callback && events[i].callback !== callback || context && events[i].context !== context)) {
+              events.splice(i, 1);
             }
+          }
         },
 
         // **Trigger an event**
@@ -81,15 +96,13 @@
         //       console.log(name) // "Kim Joar"
         //     });
         //
-        trigger: function() {
-            var events = this._events();
-            events.emit.apply(events, arguments);
-        },
-
-        // Helper to create an EventEmitter, which is the library used for events.
-        _events: function() {
-            if (!this.eventEmitter) this.eventEmitter = new EventEmitter();
-            return this.eventEmitter;
+        trigger: function(event) {
+          var args = Array.prototype.slice.call(arguments, 1);
+          var callbacks = this._callbacks || {};
+          var events = callbacks[event] || [];
+          for (i = 0; i < events.length; i++) {
+            events[i].callback.apply(events[i].context || this, args);
+          }
         }
     };
 
@@ -374,4 +387,4 @@
         return child;
     };
 
-})(this, jQuery, EventEmitter);
+})(this, jQuery);

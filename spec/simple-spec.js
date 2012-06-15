@@ -149,6 +149,19 @@ describe("Simple", function () {
             expect(spy).toHaveBeenCalledOnce();
         });
 
+        it("allows firing of several callbacks for same event", function() {
+            var spy = this.spy(),
+                spy2 = this.spy();
+
+            Simple.events.on("test", spy);
+            Simple.events.on("test", spy);
+            Simple.events.on("test", spy2);
+            Simple.events.trigger("test");
+
+            expect(spy).toHaveBeenCalledTwice();
+            expect(spy2).toHaveBeenCalledOnce();
+        });
+
         it("allows arguments to be sent when triggering event", function() {
             var spy = this.spy();
 
@@ -169,13 +182,17 @@ describe("Simple", function () {
         });
 
         it("allows unbinding of all events when no listener is specified", function() {
-            var spy = this.spy();
+            var spy = this.spy(),
+                spy2 = this.spy();
 
             Simple.events.on("test", spy);
+            Simple.events.on("test", spy);
+            Simple.events.on("test", spy2);
             Simple.events.off("test");
             Simple.events.trigger("test");
 
             expect(spy).not.toHaveBeenCalled();
+            expect(spy2).not.toHaveBeenCalled();
         });
 
         it("allows specifying which scope the unbind should have", function() {
