@@ -33,15 +33,17 @@
     // ------
 
     // A module that can be *mixed in* to *any* object in order to provide it with
-    // custom events. You may bind events with with `on`, unbind with `off`, and
-    // fire all event callbacks in successtion with `trigger`:
+    // custom events:
     //
     //     var object = {};
     //     $.extend(object, Simple.Events);
+    //
+    // You may bind events with with `on`, unbind with `off`, and fire all
+    // event callbacks in successtion with `trigger`:
+    //
     //     object.on('test', function(){ console.log("testing!"); });
     //     object.trigger('test');
     //     object.off('test');
-    //
     var Events = Simple.Events = {
         // **Bind an event to a callback**
         //
