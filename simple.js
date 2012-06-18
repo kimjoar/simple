@@ -313,7 +313,7 @@
             this.trigger(type + ':started');
 
             var params = {
-                url: model.url,
+                url: (typeof model.url === "function") ? model.url() : model.url,
                 dataType: options.dataType || model.dataType || "json",
                 success: function(data) {
                     model.attrs(data);

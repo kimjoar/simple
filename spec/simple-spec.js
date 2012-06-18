@@ -389,6 +389,20 @@ describe("Simple", function () {
                 expect(this.requests[0].url).toMatch(this.model.url);
             });
 
+            it("handles url's which are defined as a function", function() {
+                var Model = Simple.Model.extend({
+                    url: function() {
+                      return "/url";
+                    }
+                });
+                var model = new Model();
+
+                model.fetch();
+
+                expect(this.requests.length).toBe(1);
+                expect(this.requests[0].url).toMatch(model.url());
+            });
+
             it("triggers 'fetch:started' before request", function() {
                 var spy = this.spy();
                 this.model.on("fetch:started", spy);
