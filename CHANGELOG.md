@@ -1,5 +1,5 @@
-0.1.1
------
+0.1.1 - 22 June 2012
+--------------------
 
 * Get rid of `Object.create` dependency.
 * Removed dependency to [EventEmitter](https://github.com/Wolfy87/EventEmitter).
@@ -31,7 +31,7 @@
   view.off("test");
   ```
 
-0.1.0
------
+0.1.0 - 14 June 2012
+--------------------
 
 * Initial release
