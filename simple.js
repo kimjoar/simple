@@ -9,10 +9,9 @@
 // models and views. It aims to be a JavaScript MV* library which is both easy
 // to understand and easy to extend.
 //
-// Simple.js is (currently) 119
-// [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
-// lines of code. The project is
-// [hosted on Github](https://github.com/kjbekkelund/simple).
+// Simple.js is (currently) 119 [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
+// lines of code. The project is [hosted on Github](https://github.com/kjbekkelund/simple),
+// where you can also find the [changelog](https://github.com/kjbekkelund/simple/blob/master/CHANGELOG.md).
 //
 // Simple.js depends on [jQuery](http://jquery.com/). Remember to include it
 // before you include Simple.js itself.
