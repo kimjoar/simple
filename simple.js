@@ -13,8 +13,8 @@
 // lines of code. The project is [hosted on Github](https://github.com/kjbekkelund/simple),
 // where you can also find the [changelog](https://github.com/kjbekkelund/simple/blob/master/CHANGELOG.md).
 //
-// Simple.js depends on [jQuery](http://jquery.com/). Remember to include it
-// before you include Simple.js itself.
+// Simple.js depends on [jQuery](http://jquery.com/) 1.7.0. Remember to include
+// it before you include Simple.js itself.
 //
 // This library is heavily inspired by [Backbone.js](http://backbonejs.org/)
 // and [Spine.js](http://spinejs.com/).
