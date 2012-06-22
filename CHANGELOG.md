@@ -1,6 +1,8 @@
 0.1.1 - 22 June 2012
 --------------------
 
+[See all commits](https://github.com/kjbekkelund/simple/compare/v0.1.0...v0.1.1)
+
 * Get rid of `Object.create` dependency.
 * Removed dependency to [EventEmitter](https://github.com/Wolfy87/EventEmitter).
   There are no breaking changes to the event API.
