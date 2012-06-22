@@ -148,7 +148,15 @@
     };
 
     // Attach all inheritable methods to the View prototype.
-    $.extend(View.prototype, {
+    //
+    // We also attach events which means that we can now bind, unbind and
+    // trigger events on a view, e.g.
+    //
+    //     var view = new Simple.View();
+    //     view.on(...)
+    //     view.off(...)
+    //     view.trigger(...)
+    $.extend(View.prototype, Events, {
 
         // no-op initialize
         initialize: function() {},

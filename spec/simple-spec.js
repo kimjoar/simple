@@ -290,6 +290,52 @@ describe("Simple", function () {
                 expect(spy).toHaveBeenCalledOnce();
             });
         });
+
+        describe("events", function() {
+            it("allows binding and firing of events", function() {
+                var spy = this.spy();
+
+                this.view.on("test", spy, this.view);
+                this.view.trigger("test");
+
+                expect(spy).toHaveBeenCalledOnce();
+                expect(spy).toHaveBeenCalledOn(this.view);
+            });
+
+            it("allows arguments to be sent when triggering event", function() {
+                var spy = this.spy();
+
+                this.view.on("test", spy);
+                this.view.trigger("test", "Kim Joar");
+
+                expect(spy).toHaveBeenCalledOnceWith("Kim Joar");
+            });
+
+            it("allows unbinding of events", function() {
+                var spy = this.spy();
+
+                this.view.on("test", spy);
+                this.view.off("test", spy);
+                this.view.trigger("test");
+
+                expect(spy).not.toHaveBeenCalled();
+            });
+
+            it("creates a unique event handler for each instance", function() {
+                var view2 = new Simple.View({});
+
+                var spy = this.spy();
+                var spy2 = this.spy();
+
+                this.view.on("test", spy);
+                view2.on("test", spy2);
+
+                this.view.trigger("test");
+
+                expect(spy).toHaveBeenCalledOnce();
+                expect(spy2).not.toHaveBeenCalled();
+            });
+        });
     });
 
     describe("Model", function() {
