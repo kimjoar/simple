@@ -1,10 +1,10 @@
 0.1.1
 -----
 
-* Get rid of Object.create dependency.
-* Removed dependency to EventEmitter. There are no breaking changes to
-  the event API.
-* Expose Simple.Events to make it easier to use the event library
+* Get rid of `Object.create` dependency.
+* Removed dependency to [EventEmitter](https://github.com/Wolfy87/EventEmitter).
+  There are no breaking changes to the event API.
+* Expose `Simple.Events` to make it easier to use the event library
   outside of Simple.js itself, e.g. for global event handling. Now
   events can be added to any object:
 
