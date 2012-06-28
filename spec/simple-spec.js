@@ -687,5 +687,31 @@ describe("Simple", function () {
                 expect(model.attr("name")).toMatch("Kim Joar");
             });
         });
+
+        describe("defaults", function() {
+          it("sets default variables on initialization", function() {
+            var Model = Simple.Model.extend({
+              defaults: {
+                to: "Test"
+              }
+            });
+
+            var model = new Model();
+
+            expect(model.attr("to")).toEqual("Test");
+          });
+
+          it("overrides default attributes with those passed at initialization", function() {
+            var Model = Simple.Model.extend({
+              defaults: {
+                to: "Test"
+              }
+            });
+
+            var model = new Model({ to: "What?" });
+
+            expect(model.attr("to")).toEqual("What?");
+          });
+        });
     });
 });
