@@ -240,12 +240,18 @@
     // initialized, so we can use it set up some basic state that is common
     // among all models.
     var Model = Simple.Model = function(options) {
-        // If there are attributes set in the defaults hash, we automatically
-        // set these attributes.
+        // The model's attributes default to the to those specified in the
+        // `defaults` hash, e.g. as follows:
+        //
+        //     var Model = Simple.Model.extend({
+        //       defaults: {
+        //         name: "Kim Joar"
+        //       }
+        //     })
         this.attributes = this.defaults || {};
 
-        // The model's attributes default to the options specified when
-        // initializing a model or an empty hash if none is specified.
+        // We set the attributes specified when initializing the model, or an
+        // empty hash if none is specified.
         this.attrs(options || {});
 
         // On initialization the input is passed through to the `initialize`
