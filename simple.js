@@ -247,7 +247,7 @@
         //       defaults: {
         //         name: "Kim Joar"
         //       }
-        //     })
+        //     });
         this.attributes = this.defaults || {};
 
         // We set the attributes specified when initializing the model, or an
