@@ -1,7 +1,7 @@
 docs:
 	@docco simple.js
 	@mv docs/{simple,index}.html
-	@scp docs/* kimjoar@simplejs.org:/www/kimjoar/simplejs.org/www
+	@scp -r docs/* kimjoar@simplejs.org:/www/kimjoar/simplejs.org/www
 	@rm -rf docs
 
 clean:
