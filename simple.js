@@ -1,4 +1,4 @@
-//     Simple.js 0.1.1
+//     Simple.js 0.1.2
 //
 //     A simplistic MV* JavaScript library.
 //     Simple may be freely distributed under the MIT license.

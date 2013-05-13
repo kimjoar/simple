@@ -1,3 +1,19 @@
+0.1.2 - 13 May 2013
+-------------------
+
+[See all commits](https://github.com/kjbekkelund/simple/compare/v0.1.1...v0.1.2)
+
+* Enable models to have default values specified in a `defaults` hash, e.g.:
+
+  ```javascript
+  var Model = Simple.Model.extend({
+    defaults: {
+      name: "Kim Joar"
+    }
+  });
+  ```
+* Removed global variable
+
 0.1.1 - 22 June 2012
 --------------------
 
