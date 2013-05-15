@@ -239,10 +239,16 @@ describe("Simple", function () {
             it("returns a jQuery object", function() {
                 this.view.el.html('<h1>Kim Joar</h1>');
 
-                expect(this.view.DOM("h1") instanceof jQuery).toBeTrue();
+                expect(this.view.$("h1") instanceof jQuery).toBeTrue();
             });
 
             it("enables DOM selector search in the views rendered html", function() {
+                this.view.el.html('<h1>Kim Joar</h1>');
+
+                expect(this.view.$("h1").text()).toMatch("Kim Joar");
+            });
+
+            it("enables DOM selector search with `DOM` function", function() {
                 this.view.el.html('<h1>Kim Joar</h1>');
 
                 expect(this.view.DOM("h1").text()).toMatch("Kim Joar");

@@ -1,4 +1,4 @@
-//     Simple.js 0.1.3
+//     Simple.js 0.1.4
 //
 //     A simplistic MV* JavaScript library.
 //     Simple may be freely distributed under the MIT license.
@@ -9,7 +9,7 @@
 // models and views. It aims to be a JavaScript MV* library which is both easy
 // to understand and easy to extend.
 //
-// Simple.js is (currently) 120 [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
+// Simple.js is (currently) 123 [thoroughly tested](https://github.com/kjbekkelund/simple/blob/master/spec/simple-spec.js)
 // lines of code. The project is [hosted on Github](https://github.com/kjbekkelund/simple),
 // where you can also find the [changelog](https://github.com/kjbekkelund/simple/blob/master/CHANGELOG.md).
 //
@@ -187,7 +187,8 @@
         // **DOM lookup**
         //
         // jQuery delegate for element lookup, scoped to DOM elements within
-        // the current view. Example:
+        // the current view. You can think of `view.$` as a scoped jQuery
+        // lookup. Example:
         //
         //     var view = new Simple.View({ el: $(".user") });
         //
@@ -195,9 +196,14 @@
         //     $(".user form")
         //
         //     // we should now do
-        //     view.DOM("form")
-        DOM: function(selector) {
+        //     view.$("form")
+        $: function(selector) {
             return this.el.find(selector);
+        },
+
+        // Alias for `view.$`. Deprecated.
+        DOM: function() {
+            return this.$.apply(this, arguments);
         },
 
         // **Event delegation**

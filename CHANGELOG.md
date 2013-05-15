@@ -1,3 +1,11 @@
+0.1.4 - 15 May 2013
+-------------------
+
+[See all commits](https://github.com/kjbekkelund/simple/compare/v0.1.3...v0.1.4)
+
+* Deprecated `view.DOM`, use `view.$` instead. Think of it as a scoped
+  jQuery selector.
+
 0.1.3 - 15 May 2013
 -------------------
 
