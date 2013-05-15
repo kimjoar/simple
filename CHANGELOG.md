@@ -1,3 +1,19 @@
+0.1.3 -
+-------
+
+[See all commits](https://github.com/kjbekkelund/simple/compare/v0.1.2...v0.1.3)
+
+* Return the [jQuery XMLHttpRequest (`jqXHR`) object](http://api.jquery.com/jQuery.ajax/#jqXHR)
+  from `model.save` and `model.fetch`. The `jqXHR` implements the
+  Promise interface, so you can write the following instead of relying
+  on events or callbacks:
+
+  ```javascript
+  this.model.save().then(function(data, textStatus, jqXHR) {
+      console.log('success!');
+  });
+  ```
+
 0.1.2 - 13 May 2013
 -------------------
 

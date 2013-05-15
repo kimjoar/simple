@@ -531,6 +531,35 @@ describe("Simple", function () {
 
                 expect(spy).toHaveBeenCalledOnceWith("error");
             });
+
+            it("returns a promise", function() {
+                var promise = this.model.fetch();
+
+                expect(typeof promise.then === 'function').toBeTrue();
+            });
+
+            it("resolves promise when request succeeds", function() {
+                var promise = this.model.fetch();
+
+                var spy = this.spy();
+                promise.then(spy);
+
+                this.requests[0].respond(200, { "Content-Type": "application/json" },
+                                 '{ "id": 12, "name": "Kim Joar" }');
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("rejects promise when request fails", function() {
+                var promise = this.model.fetch();
+
+                var spy = this.spy();
+                promise.then(null, spy);
+
+                this.requests[0].respond(404);
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
         });
 
         describe("save", function() {
@@ -641,6 +670,34 @@ describe("Simple", function () {
                 expect(eventSpy).not.toHaveBeenCalled();
             });
 
+            it("returns a promise", function() {
+                var promise = this.model.save();
+
+                expect(typeof promise.then === 'function').toBeTrue();
+            });
+
+            it("resolves promise when request succeeds", function() {
+                var promise = this.model.save();
+
+                var spy = this.spy();
+                promise.then(spy);
+
+                this.requests[0].respond(200, { "Content-Type": "application/json" },
+                                 '{ "id": 12, "name": "Kim Joar" }');
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
+
+            it("rejects promise when request fails", function() {
+                var promise = this.model.save();
+
+                var spy = this.spy();
+                promise.then(null, spy);
+
+                this.requests[0].respond(404);
+
+                expect(spy).toHaveBeenCalledOnce();
+            });
         });
 
         describe("attr", function() {

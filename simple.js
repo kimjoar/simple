@@ -293,8 +293,18 @@
         //         // we have a success
         //       }
         //     });
+        //
+        // Fetch returns the [jQuery XMLHttpRequest object](http://api.jquery.com/jQuery.ajax/#jqXHR),
+        // `jqXHR`, which implements the Promise interface.
+        //
+        // Example using promises:
+        //
+        //     var model = new Simple.Model();
+        //     this.model.fetch().then(function(data, textStatus, jqXHR) {
+        //       // we have a success
+        //     });
         fetch: function(options) {
-            this._performRequest("fetch", this, options || {}, {});
+            return this._performRequest("fetch", this, options || {}, {});
         },
 
         // **Perform an Ajax POST request**
@@ -317,8 +327,18 @@
         //         // we have a success
         //       }
         //     });
+        //
+        // Save returns the [jQuery XMLHttpRequest object](http://api.jquery.com/jQuery.ajax/#jqXHR),
+        // `jqXHR`, which implements the Promise interface.
+        //
+        // Example using promises:
+        //
+        //     var model = new Simple.Model();
+        //     this.model.save().then(function(data, textStatus, jqXHR) {
+        //       // we have a success
+        //     });
         save: function(options) {
-            this._performRequest("save", this, options || {}, {
+            return this._performRequest("save", this, options || {}, {
               type: "POST",
               data: JSON.stringify(this.attributes),
               contentType: 'application/json'
@@ -349,7 +369,7 @@
                 }
             };
 
-            $.ajax($.extend(params, additionalParams));
+            return $.ajax($.extend(params, additionalParams));
         },
 
         // **Attributes**
