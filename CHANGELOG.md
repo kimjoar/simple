@@ -1,5 +1,5 @@
-0.1.3 -
--------
+0.1.3 - 15 May 2013
+-------------------
 
 [See all commits](https://github.com/kjbekkelund/simple/compare/v0.1.2...v0.1.3)
 
