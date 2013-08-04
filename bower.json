@@ -1,0 +1,12 @@
+{
+  "name": "simple.js",
+  "version": "0.1.4",
+  "main": "simple.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
