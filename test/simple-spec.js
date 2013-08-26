@@ -1,5 +1,3 @@
-buster.spec.expose();
-
 describe("Simple", function () {
     it("is defined", function() {
         expect(Simple).toBeDefined();
@@ -30,7 +28,7 @@ describe("Simple", function () {
             var Model = Simple.Model.extend({});
             var model = new Model();
 
-            expect(model instanceof Simple.Model).toBeTrue();
+            expect(model instanceof Simple.Model).toBe(true);
         });
 
         it("has correct instanceof when extending child", function() {
@@ -38,7 +36,7 @@ describe("Simple", function () {
             var Child = Model.extend({});
             var child = new Child();
 
-            expect(child instanceof Simple.Model).toBeTrue();
+            expect(child instanceof Simple.Model).toBe(true);
         });
 
         it("enables child creation from a created child", function() {
@@ -111,7 +109,7 @@ describe("Simple", function () {
         });
 
         it("calls initialize with first parameter when model in initialized", function() {
-            var spy = this.spy();
+            var spy = sinon.spy();
 
             var Model = Simple.Model.extend({
                 initialize: spy
@@ -120,7 +118,8 @@ describe("Simple", function () {
             var opts = { test: "testing", test2: "testing" };
             new Model(opts);
 
-            expect(spy).toHaveBeenCalledOnceWith(opts);
+            expect(spy).toHaveBeenCalledOnce();
+            expect(spy).toHaveBeenCalledWith(opts)
         });
 
         it("does not add properties to parent", function() {
@@ -142,7 +141,7 @@ describe("Simple", function () {
         });
 
         it("allows binding and firing of events", function() {
-            var spy = this.spy();
+            var spy = sinon.spy();
 
             Simple.events.on("test", spy);
             Simple.events.trigger("test");
@@ -151,8 +150,8 @@ describe("Simple", function () {
         });
 
         it("allows firing of several callbacks for same event", function() {
-            var spy = this.spy(),
-                spy2 = this.spy();
+            var spy = sinon.spy(),
+                spy2 = sinon.spy();
 
             Simple.events.on("test", spy);
             Simple.events.on("test", spy);
@@ -164,16 +163,17 @@ describe("Simple", function () {
         });
 
         it("allows arguments to be sent when triggering event", function() {
-            var spy = this.spy();
+            var spy = sinon.spy();
 
             Simple.events.on("test", spy);
             Simple.events.trigger("test", "Kim Joar");
 
-            expect(spy).toHaveBeenCalledOnceWith("Kim Joar");
+            expect(spy).toHaveBeenCalledOnce();
+            expect(spy).toHaveBeenCalledWith("Kim Joar");
         });
 
         it("allows unbinding of events with listener specified", function() {
-            var spy = this.spy();
+            var spy = sinon.spy();
 
             Simple.events.on("test", spy);
             Simple.events.off("test", spy);
@@ -183,8 +183,8 @@ describe("Simple", function () {
         });
 
         it("allows unbinding of all events when no listener is specified", function() {
-            var spy = this.spy(),
-                spy2 = this.spy();
+            var spy = sinon.spy(),
+                spy2 = sinon.spy();
 
             Simple.events.on("test", spy);
             Simple.events.on("test", spy);
@@ -197,7 +197,7 @@ describe("Simple", function () {
         });
 
         it("allows specifying which scope the unbind should have", function() {
-            var spy = this.spy(),
+            var spy = sinon.spy(),
                 scope = {},
                 scope2 = {};
 
@@ -222,7 +222,7 @@ describe("Simple", function () {
         });
 
         it("enables initialization of views using new", function() {
-            expect(this.view instanceof Simple.View).toBeTrue();
+            expect(this.view instanceof Simple.View).toBe(true);
         });
 
         it("enables creation of new views", function() {
@@ -239,7 +239,7 @@ describe("Simple", function () {
             it("returns a jQuery object", function() {
                 this.view.el.html('<h1>Kim Joar</h1>');
 
-                expect(this.view.$("h1") instanceof jQuery).toBeTrue();
+                expect(this.view.$("h1") instanceof jQuery).toBe(true);
             });
 
             it("enables DOM selector search in the views rendered html", function() {
@@ -257,7 +257,7 @@ describe("Simple", function () {
 
         describe("event delegation", function() {
             it("binds DOM events to specified selector", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 var View = Simple.View.extend({
                     events: {
@@ -277,7 +277,7 @@ describe("Simple", function () {
             });
 
             it("binds DOM events to `el` when no selector is specified", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 var View = Simple.View.extend({
                     events: {
@@ -299,7 +299,7 @@ describe("Simple", function () {
 
         describe("events", function() {
             it("allows binding and firing of events", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 this.view.on("test", spy, this.view);
                 this.view.trigger("test");
@@ -309,16 +309,17 @@ describe("Simple", function () {
             });
 
             it("allows arguments to be sent when triggering event", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 this.view.on("test", spy);
                 this.view.trigger("test", "Kim Joar");
 
-                expect(spy).toHaveBeenCalledOnceWith("Kim Joar");
+                expect(spy).toHaveBeenCalledOnce();
+                expect(spy).toHaveBeenCalledWith("Kim Joar");
             });
 
             it("allows unbinding of events", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 this.view.on("test", spy);
                 this.view.off("test", spy);
@@ -330,8 +331,8 @@ describe("Simple", function () {
             it("creates a unique event handler for each instance", function() {
                 var view2 = new Simple.View({});
 
-                var spy = this.spy();
-                var spy2 = this.spy();
+                var spy = sinon.spy();
+                var spy2 = sinon.spy();
 
                 this.view.on("test", spy);
                 view2.on("test", spy2);
@@ -350,7 +351,7 @@ describe("Simple", function () {
         });
 
         it("enables initialization of models using new", function() {
-            expect(this.model instanceof Simple.Model).toBeTrue();
+            expect(this.model instanceof Simple.Model).toBe(true);
         });
 
         it("sets attributes on initialization", function() {
@@ -371,7 +372,7 @@ describe("Simple", function () {
 
         describe("events", function() {
             it("allows binding and firing of events", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 this.model.on("test", spy, this.model);
                 this.model.trigger("test");
@@ -381,16 +382,17 @@ describe("Simple", function () {
             });
 
             it("allows arguments to be sent when triggering event", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 this.model.on("test", spy);
                 this.model.trigger("test", "Kim Joar");
 
-                expect(spy).toHaveBeenCalledOnceWith("Kim Joar");
+                expect(spy).toHaveBeenCalledWith();
+                expect(spy).toHaveBeenCalledOnce("Kim Joar");
             });
 
             it("allows unbinding of events", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
 
                 this.model.on("test", spy);
                 this.model.off("test", spy);
@@ -402,8 +404,8 @@ describe("Simple", function () {
             it("creates a unique event handler for each instance", function() {
                 var model2 = new Simple.Model();
 
-                var spy = this.spy();
-                var spy2 = this.spy();
+                var spy = sinon.spy();
+                var spy2 = sinon.spy();
 
                 this.model.on("test", spy);
                 model2.on("test", spy2);
@@ -456,7 +458,7 @@ describe("Simple", function () {
             });
 
             it("triggers 'fetch:started' before request", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
                 this.model.on("fetch:started", spy);
 
                 this.model.fetch();
@@ -465,19 +467,19 @@ describe("Simple", function () {
             });
 
             it("triggers 'fetch:finished' on success", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
                 this.model.on("fetch:finished", spy);
 
                 this.model.fetch();
 
-                this.requests[0].respond();
+                this.requests[0].respond(204);
 
                 expect(spy).toHaveBeenCalledOnce();
             });
 
             it("executes success callback if one is set and fetch is successful", function() {
-                var callbackSpy = this.spy();
-                var eventSpy = this.spy();
+                var callbackSpy = sinon.spy();
+                var eventSpy = sinon.spy();
 
                 this.model.on("fetch:finished", eventSpy);
 
@@ -488,7 +490,8 @@ describe("Simple", function () {
                 this.requests[0].respond(200, { "Content-Type": "application/json" },
                                  JSON.stringify(data));
 
-                expect(callbackSpy).toHaveBeenCalledOnceWith(data);
+                expect(callbackSpy).toHaveBeenCalledOnce();
+                expect(callbackSpy).toHaveBeenCalledWith(data);
                 expect(eventSpy).not.toHaveBeenCalled();
             });
 
@@ -503,7 +506,7 @@ describe("Simple", function () {
             });
 
             it("triggers 'fetch:error' on failure", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
                 this.model.on("fetch:error", spy);
 
                 this.model.fetch();
@@ -514,8 +517,8 @@ describe("Simple", function () {
             });
 
             it("executes error callback if one is set and fetch is not successful", function() {
-                var callbackSpy = this.spy();
-                var eventSpy = this.spy();
+                var callbackSpy = sinon.spy();
+                var eventSpy = sinon.spy();
 
                 this.model.on("fetch:error", eventSpy);
 
@@ -528,26 +531,27 @@ describe("Simple", function () {
             });
 
             it("includes response in 'fetch:error' event", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
                 this.model.on("fetch:error", spy);
 
                 this.model.fetch();
 
                 this.requests[0].respond(404);
 
-                expect(spy).toHaveBeenCalledOnceWith("error");
+                expect(spy).toHaveBeenCalledOnce();
+                expect(spy).toHaveBeenCalledWith("error");
             });
 
             it("returns a promise", function() {
                 var promise = this.model.fetch();
 
-                expect(typeof promise.then === 'function').toBeTrue();
+                expect(typeof promise.then === 'function').toBe(true);
             });
 
             it("resolves promise when request succeeds", function() {
                 var promise = this.model.fetch();
 
-                var spy = this.spy();
+                var spy = sinon.spy();
                 promise.then(spy);
 
                 this.requests[0].respond(200, { "Content-Type": "application/json" },
@@ -559,7 +563,7 @@ describe("Simple", function () {
             it("rejects promise when request fails", function() {
                 var promise = this.model.fetch();
 
-                var spy = this.spy();
+                var spy = sinon.spy();
                 promise.then(null, spy);
 
                 this.requests[0].respond(404);
@@ -596,7 +600,7 @@ describe("Simple", function () {
             });
 
             it("triggers 'save:started' before request", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
                 this.model.on("save:started", spy);
 
                 this.model.save();
@@ -605,18 +609,18 @@ describe("Simple", function () {
             });
 
             it("triggers 'save:finished' on success", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
                 this.model.on("save:finished", spy);
 
                 this.model.save();
-                this.requests[0].respond();
+                this.requests[0].respond(204);
 
                 expect(spy).toHaveBeenCalledOnce();
             });
 
             it("executes success callback if one is set and save is successful", function() {
-                var callbackSpy = this.spy();
-                var eventSpy = this.spy();
+                var callbackSpy = sinon.spy();
+                var eventSpy = sinon.spy();
 
                 this.model.on("save:finished", eventSpy);
 
@@ -627,7 +631,8 @@ describe("Simple", function () {
                 this.requests[0].respond(200, { "Content-Type": "application/json" },
                                  JSON.stringify(data));
 
-                expect(callbackSpy).toHaveBeenCalledOnceWith(data);
+                expect(callbackSpy).toHaveBeenCalledOnce();
+                expect(callbackSpy).toHaveBeenCalledWith(data);
                 expect(eventSpy).not.toHaveBeenCalled();
             });
 
@@ -653,7 +658,7 @@ describe("Simple", function () {
             });
 
             it("triggers 'save:error' on failure", function() {
-                var spy = this.spy();
+                var spy = sinon.spy();
                 this.model.on("save:error", spy);
 
                 this.model.save();
@@ -663,8 +668,8 @@ describe("Simple", function () {
             });
 
             it("executes error callback if one is set and save is not successful", function() {
-                var callbackSpy = this.spy();
-                var eventSpy = this.spy();
+                var callbackSpy = sinon.spy();
+                var eventSpy = sinon.spy();
 
                 this.model.on("save:error", eventSpy);
 
@@ -679,13 +684,13 @@ describe("Simple", function () {
             it("returns a promise", function() {
                 var promise = this.model.save();
 
-                expect(typeof promise.then === 'function').toBeTrue();
+                expect(typeof promise.then === 'function').toBe(true);
             });
 
             it("resolves promise when request succeeds", function() {
                 var promise = this.model.save();
 
-                var spy = this.spy();
+                var spy = sinon.spy();
                 promise.then(spy);
 
                 this.requests[0].respond(200, { "Content-Type": "application/json" },
@@ -697,7 +702,7 @@ describe("Simple", function () {
             it("rejects promise when request fails", function() {
                 var promise = this.model.save();
 
-                var spy = this.spy();
+                var spy = sinon.spy();
                 promise.then(null, spy);
 
                 this.requests[0].respond(404);

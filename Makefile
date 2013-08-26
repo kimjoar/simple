@@ -8,7 +8,7 @@ clean:
 	@rm -rf docs
 
 test:
-	@node_modules/.bin/buster test
+	@node_modules/.bin/karma start
 
 lines:
 	@cloc simple.js

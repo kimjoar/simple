@@ -8,5 +8,12 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0",
+    "jasmine-sinon": "~0.1.0"
+  },
+  "devDependencies": {
+    "sinonjs": ">=1.6.0"
+  }
 }
