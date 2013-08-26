@@ -1,6 +1,6 @@
 {
   "name": "simple.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simplistic MV* JavaScript library",
   "main": "simple.js",
   "scripts": {
