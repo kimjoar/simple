@@ -20,9 +20,15 @@
 // and [Spine.js](http://spinejs.com/).
 
 (function (root, factory) {
+
+    // Export magic
+    // ------------
     if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but only CommonJS-like
+        // enviroments that support module.exports, like Node.
         module.exports = factory(require('jquery'));
     } else {
         // Browser globals (root is window)
