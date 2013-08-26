@@ -19,14 +19,23 @@
 // This library is heavily inspired by [Backbone.js](http://backbonejs.org/)
 // and [Spine.js](http://spinejs.com/).
 
-(function(root, $) {
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals (root is window)
+        root.Simple = factory(root.jQuery);
+    }
+}(this, function ($) {
 
     // Namespace
     // ---------
 
     // The top-level namespace. All public Simple classes and modules will be
     // attached to this.
-    var Simple = root.Simple = {};
+    var Simple = {};
 
     // Events
     // ------
@@ -432,4 +441,6 @@
         return child;
     };
 
-})(this, jQuery);
+    return Simple;
+
+}));
