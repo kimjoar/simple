@@ -1,0 +1,22 @@
+{
+  "name": "simple.js",
+  "version": "0.1.4",
+  "description": "Simplistic MV* JavaScript library",
+  "main": "simple.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kjbekkelund/simple.git"
+  },
+  "author": "Kim Joar Bekkelund",
+  "license": "MIT",
+  "gitHead": "04cc35e513435ff2437eb07b9818f0927cdbfdbb",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "uglify-js": "~2.3.4",
+    "buster": "~0.6.12",
+    "docco": "~0.6.2"
+  }
+}

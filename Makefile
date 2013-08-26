@@ -1,5 +1,5 @@
 docs:
-	@docco simple.js
+	@node_modules/.bin/docco simple.js
 	@mv docs/{simple,index}.html
 	@scp -r docs/* kimjoar@simplejs.org:/www/kimjoar/simplejs.org/www
 	@rm -rf docs
@@ -8,12 +8,12 @@ clean:
 	@rm -rf docs
 
 test:
-	@buster test
+	@node_modules/.bin/buster test
 
 lines:
 	@cloc simple.js
 
 min:
-	@uglifyjs simple.js > simple.min.js
+	@node_modules/.bin/uglifyjs simple.js > simple.min.js
 
 .PHONY: test docs lines
