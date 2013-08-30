@@ -1,3 +1,11 @@
+0.1.6 - 30 Aug 2013
+-------------------
+
+[See all commits](https://github.com/kjbekkelund/simple/compare/v0.1.5...v0.1.6)
+
+* Make `jasmine-sinon` a dev dependency in Bower config
+* Add comments about Bower and exports to AMD and CommonJS
+
 0.1.5 - 26 Aug 2013
 -------------------
 
