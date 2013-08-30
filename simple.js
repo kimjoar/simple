@@ -16,6 +16,8 @@
 // Simple.js depends on [jQuery](http://jquery.com/) 1.7.0. Remember to include
 // it before you include Simple.js itself.
 //
+// You can install Simple.js using Bower: `bower install --save simple.js`
+//
 // This library is heavily inspired by [Backbone.js](http://backbonejs.org/)
 // and [Spine.js](http://spinejs.com/).
 
