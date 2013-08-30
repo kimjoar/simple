@@ -1,3 +1,12 @@
+0.1.5 - 26 Aug 2013
+-------------------
+
+[See all commits](https://github.com/kjbekkelund/simple/compare/v0.1.4...v0.1.5)
+
+* Added to Bower. Install with `bower install --save simple.js`
+* Switched tests from Buster.js to Karma and Jasmine
+* Added support for CommonJS and AMD
+
 0.1.4 - 15 May 2013
 -------------------
 
