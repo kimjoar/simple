@@ -235,7 +235,7 @@ describe("Simple", function () {
             });
         });
 
-        describe("DOM", function() {
+        describe("$", function() {
             it("returns a jQuery object", function() {
                 this.view.el.html('<h1>Kim Joar</h1>');
 
