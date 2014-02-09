@@ -218,11 +218,6 @@
             return this.el.find(selector);
         },
 
-        // Alias for `view.$`. Deprecated.
-        DOM: function() {
-            return this.$.apply(this, arguments);
-        },
-
         // **Event delegation**
         //
         // Set callbacks, where `this.events` is a hash of<br>
